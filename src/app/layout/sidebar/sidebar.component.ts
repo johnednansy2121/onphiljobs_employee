@@ -83,7 +83,7 @@ export class SidebarComponent implements OnInit {
       title: 'Activity', icon: 'briefcase', visibility: 'inactive',
       sub: [
         { title: "Calendar", icon: "calendar", route: "/calendar" },
-        { title: "Diary", icon: "file", route: "/diary" },
+        // { title: "Diary", icon: "file", route: "/diary" },
         { title: "Tasks", icon: "tasks", route: "/tasks" },
       ],
     },
