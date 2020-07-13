@@ -1,0 +1,140 @@
+<div class="page">
+    <div class="page-header">
+        <div class="content__title">
+            <h1>TASK LIST</h1>
+            <small>List of your tasks</small>
+        </div>
+    </div>
+
+    <div class="row todo">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="toolbar toolbar--inner">
+                    <div class="toolbar__label">Ongoing {{ onGoingItems }}</div>
+                    <div class="toolbar__label ml-3">Completed {{ completedItems }} </div>
+                
+                    <div class="actions">
+                        <i class="action_icons actions__item fas fa-search" (click)="todoSearch = true"></i>
+                        <div class="dropdown actions__item" dropdown>
+                            <i class="action_icons fa fa-sort-amount-asc" dropdownToggle></i>
+                
+                            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                                <li role="menuitem">
+                                    <button class="dropdown-item" (click)="changeSort('-metadata.dateCreated')">Newest to
+                                        Oldest</button>
+                                </li>
+                                <li role="menuitem">
+                                    <button class="dropdown-item" (click)="changeSort('metadata.dateCreated')">Oldest to
+                                        Newest</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                
+                    <div class="toolbar__search" *ngIf="todoSearch">
+                        <input type="text" placeholder="search by tags" [(ngModel)]="name" (input)="searchChange()" />
+                        <i class="toolbar__search__close zmdi zmdi-long-arrow-left" (click)="clearSearch()"></i>
+                    </div>
+                </div>
+                <div class="card-body noPadding">
+                    <div class="empty-state" *ngIf="taskService.taskItems.length <=0; else list">
+                        <span>You dont have any tasks.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Tags</h4>
+                    <h6 class="card-subtitle">This is the list of tags used. Click to add tag to search.</h6>
+                    <div class="tags-container">
+                        <button *ngFor="let tag of taskService.tagItems" (click)="addToName(tag)">{{tag}}</button>
+                    </div>
+                    <a class="btn content__background__theme col-lg-12 text-white mt-2" [routerLink]="'/tasks/create'">Add Task</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #list>
+    <div class="listview listview--bordered">
+    
+        <div  *ngFor="let task of taskService.taskItems" class="listview__item">
+            <div class="listview__content text-truncate text-truncate">
+                <h1 class="listview__heading content__title__text mb-0" [routerLink]="">{{task.name}}</h1>
+                <small  class="text-truncate">{{task.displayCreated}}</small>
+                <p>{{task.notes}}</p>
+                <div class="tags-list">
+                    <button *ngFor="let tag of task.tags" (click)="addToName(tag)">{{tag}}</button>
+                </div>
+            </div>
+    
+            <div class="issue-tracker__item hidden-md-down my-auto mx-2">
+                <i class="fa fa-clock-o mr-1"></i> {{ dueDate(task.displayCompleted)}}
+            </div>
+    
+            <div class="issue-tracker__item actions my-auto">
+                <div class="btn-group" dropdown>
+                    <button dropdownToggle type="button" class="btn"><i class="fas fa-ellipsis-v"
+                            aria-controls="dropdown-basic"></i></button>
+                    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                        <li role="menuitem">
+                            <button class="dropdown-item" (click)="openDetailsModal(task._id, details)">View</button>
+                        </li>
+                        <li role="menuitem">
+                            <button class="dropdown-item" [disabled]="task.isCompleted"
+                                routerLink="{{'/tasks/update/' + task._id}}">Edit</button>
+                        </li>
+                        <li role="menuitem">
+                            <button class="dropdown-item" (click)="delete(task._id)">Delete</button>
+                        </li>
+                        <li role="menuitem">
+                            <button class="dropdown-item"
+                                (click)="markCompleteIncomplete(task._id)">{{task.isCompleted ? 'Mark as Incomplete': 'Mark as Complete'}}</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    
+        <div class="clearfix m-4"></div>
+    </div>
+</ng-template>
+
+<ng-template #details>
+    <div class="modal-header">
+        <h3 class="modal-title pull-left">Task Details</h3>
+        <button type="button" class="close pull-right" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="details-content">
+            <div class="details-item">
+                <label><b>Task Name:</b></label>
+                <span>{{task.name}}</span>
+            </div>
+            <div class="details-item">
+                <label>
+                    <b>Notes:</b>
+                </label>
+                <span>{{task.notes}}</span>
+            </div>
+            <div class="details-item">
+                <label>
+                    <b>Tags:</b>
+                </label>
+                <span>{{task.tags}}</span>
+            </div>
+            <div class="details-item">
+                <label>
+                    <b>Completed On:</b>
+                </label>
+                <span>{{ dueDate(task.displayCompleted)}}</span>
+            </div>
+        </div>
+    </div>
+</ng-template>

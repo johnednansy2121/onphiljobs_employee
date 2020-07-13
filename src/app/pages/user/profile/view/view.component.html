@@ -1,0 +1,156 @@
+<app-header-public *ngIf="actRoute.snapshot.data.publicView">
+
+</app-header-public>
+<div [attr.data-ma-theme]="env.theme">
+    <div [ngClass]="actRoute.snapshot.data.publicView ? 'public-padding' : ''">
+        <div class="row no-gutters">
+
+            <div class="left_panel col-lg-4">
+                <div class="d-flex justify-content-center">
+                    <div><img class="rounded-circle"
+                            [src]="user.displayPicture == '' || user.displayPicture === null ? './assets/demo/img/profile-pics/8.jpg' : user.displayPicture" />
+                    </div>
+                </div>
+
+                <div class="text-center profile_header">
+                    <h5 class="mt-2">
+                        {{user.firstName}} {{user.lastName}}
+                    </h5>
+                    <span class="font-weight-bold">{{user.jobTitle}}</span>
+                </div>
+
+                <div *ngIf="user.premium.hasProSubscription " class="col-lg-12 text-center justify-content-center p-0">
+                    <button type="button" class="btn btn-sm btn-primary  mx-1 mt-1"
+                        *ngIf="user.premium.hasProSubscription"
+                        tooltip="{{user.firstName}} pays for a premium subscription">
+                        <i class="fa fa-check"></i> Premium
+                    </button>
+                    <button type="button" class="btn btn-sm btn-success mx-1 mt-1" *ngIf="user.premium.hasHadInterview || user.premium.hasInterview"
+                        tooltip="Interviewed on {{user.premium.interviewDate | date}}">
+                        <i class="fa fa-check"></i> Interviewed
+                    </button>
+                    <button type="button" class="btn btn-sm btn-success mx-1 mt-1"
+                        *ngIf="user.premium.hasProofOfWorkingRights">
+                        <i class="fa fa-check"></i> Identity
+                    </button>
+                    <button type="button" class="btn btn-sm btn-success mx-1 mt-1"
+                        *ngIf="user.premium.isProfileVerified">
+                        <i class="fa fa-check"></i> Profile
+                    </button>
+                    <!--            <span class="badge badge-primary" *ngIf="user.metadata.hasProSubscription" tooltip="{{user.firstName}} pays for a premium subscription">PRO</span>-->
+                    <!--            <span class="badge badge-success" *ngIf="user.metadata.hasProofOfWorkingRights" tooltip="{{user.firstName}} verified their identity with legal documents">Identity</span>-->
+                    <!--            <span class="badge badge-success" *ngIf="user.metadata.isProfileVerified" tooltip="{{user.firstName}}'s profile has been verified by our recruitment consultants">Profile</span>-->
+                </div>
+
+                <hr class="w-90 mx-auto border-dotted">
+
+                <div class="text-center button_hire">
+                            <!--            <button type="button" class="btn content__background__theme p-lg-2 setPublicColor col-lg-5 mx-1 my-2">-->
+                            <!--                <i class="fa fa-handshake mr-1"></i> Contact me!-->
+                            <!--            </button>-->
+                            <button type="button"
+                                class="btn content__background__theme p-lg-2 setPublicColor col-lg-12 mx-1 my-2"
+                                (click)="openModal(socialShare)">
+                                <i class="fa fa-share mr-1"></i> Share
+                            </button>
+                </div>
+
+                <hr *ngIf="user.hasSocialLinks" class="w-90 mx-auto mb-1 border-dotted">
+                <div *ngIf="user.hasSocialLinks" class="link_content mt-lg-5 mt-sm-3">
+                    <div
+                        class="row no-gutters link_title px-3 py-2 text-left content__background__theme setPublicColor">
+                        <h2 class="my-auto">Links</h2>
+                    </div>
+                    <div class="link_list px-3 py-2">
+                        <div *ngIf="user.socialLinks.linkedin" class="link_list_content row no-gutters">
+                            <div class="h3 col-lg-3 col-sm-2 col-3 icon_span"><i class="fa fa-linkedin"></i></div>
+                            <div class="sub_header col-lg-9 col-sm-10 col-9 text-left">
+                                <h5 class="mb-0 mt-1 content__title__text">Linkedin</h5>
+                                <a [href]="user.socialLinks.linkedin">www.linkedin.com</a>
+                            </div>
+                        </div>
+                        <div *ngIf="user.socialLinks.facebook" class="link_list_content row no-gutters">
+                            <div class="h3 col-lg-3 col-sm-2 col-3 icon_span"><i class="fa fa-facebook"></i></div>
+                            <div class="sub_header col-lg-9 col-sm-10 col-9 text-left">
+                                <h5 class="mb-0 mt-1 content__title__text">Facebook</h5>
+                                <a [href]="user.socialLinks.facebook">www.facebook.com</a>
+                            </div>
+                        </div>
+                        <div *ngIf="user.socialLinks.instagram" class="link_list_content row no-gutters">
+                            <div class="h3 col-lg-3 col-sm-2 col-3 icon_span"><i class="fa fa-instagram"></i></div>
+                            <div class="sub_header col-lg-9 col-sm-10 col-9 text-left">
+                                <h5 class="mb-0 mt-1 content__title__text">Instagram</h5>
+                                <a [href]="user.socialLinks.instagram">www.instagram.com</a>
+                            </div>
+                        </div>
+                        <div *ngIf="user.socialLinks.twitter" class="link_list_content row no-gutters">
+                            <div class="h3 col-lg-3 col-sm-2 col-3 icon_span"><i class="fa fa-twitter"></i></div>
+                            <div class="sub_header col-lg-9 col-sm-10 col-9 text-left">
+                                <h5 class="mb-0 mt-1 content__title__text">Twitter</h5>
+                                <a [href]="user.socialLinks.twitter">www.twitter.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right_panel col-lg-8 pl-lg-4 pt-lg-3 pt-0">
+                <div class="overview_section mb-5">
+                    <div class="overview_content">
+                        <div class="overview_card">
+                            <div class="overview_tabs">
+                                <div class="overview content__background__theme setPublicColor px-4 pt-4 pb-2 mb-5 row no-gutters"
+                                    *ngIf="!checkMobilePlatform()">
+                                    <div *ngFor="let tabs of overviewTabs" class="tabs mx-2">
+                                        <a class="pb-2" routerLinkActive="active"
+                                            [routerLink]="['' + '' + tabs.tabRoute]">{{ tabs.tabName}}</a>
+                                    </div>
+                                </div>
+                                <div class="overview content__background__theme px-4 pt-4 pb-2 mb-5 row no-gutters justify-content-center"
+                                    *ngIf="checkMobilePlatform()">
+                                    <div *ngFor="let tabs of overviewTabs" class="tabs mx-2 ">
+                                        <a class="h3 pb-1" routerLinkActive="active"
+                                            [routerLink]="['' + '' + tabs.tabRoute]">
+                                            <i class="{{tabs.tabIcon}}" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="overview_outlet">
+                                <router-outlet></router-outlet>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #socialShare>
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">Share</h4>
+            <button type="button" class="p-3 close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row no-gutters justify-content-center">
+
+                <div *ngFor="let item of socialShareItems" class="curs_pointer">
+                    <div (click)="shareProfile(item.label)" [style.background]="item.color"
+                        class="mx-2 social_share_button rounded-circle"><i [class]="item.icon"></i></div>
+                    <p class="text-center font-weight-bold mt-2">{{ item.name }}</p>
+                </div>
+
+                <div class="copy_link">
+                    <div class="copy_link_container row no-gutters p-3">
+                        <p class="my-auto">{{ link }}</p>
+                        <p class="ml-auto my-auto cop_btn curs_pointer content__title__text font-weight-bold"
+                            (click)="copy()">COPY</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>

@@ -1,0 +1,16 @@
+<div class="mapContainer">
+    
+<input [disabled]="this.sharedSrv.isDisabled" (keydown.enter)="$event.preventDefault()" placeholder="Search location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text"  #search class="text_input input__area col-12 px-2">
+
+<agm-map style="width: 640px; height: 320px"  [latitude]="lat" [longitude]="lng" [streetViewControl]="false" [disableDefaultUI]="false" [zoom]="zoom">-->
+    <agm-circle [latitude]="lat" [longitude]="lng"
+                [radius]="300000"
+                [fillColor]="'red'"
+                [circleDraggable]="true"
+                (dragEnd)="radiusDragEnd($event)"
+                (dragStart)="radiusDragStart()"
+                (centerChange)="centerChange($event)"
+                [editable]="true">
+    </agm-circle>
+</agm-map>
+</div>

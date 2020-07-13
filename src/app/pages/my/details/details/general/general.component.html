@@ -1,0 +1,125 @@
+<form [formGroup]="profileService.detailsForm">
+<div class="card-body">
+    <div class="avatar-panel row align-items-center border_content">
+    <img [src]="profileService.detailsForm.value.displayPicture == ''? './assets/demo/img/profile-pics/8.jpg' : profileService.profileImage"
+        class="avatar" />
+    <div class="media-body ml-4">
+        <label class="btn btn-outline-theme" (click)="openModal(imageCropper)">
+            Upload new photo
+        </label> &nbsp;
+        <label class="btn btn-outline-light" (click)="reset()">
+            Reset
+        </label>
+    </div>
+</div>
+</div>
+<div class="card-body">
+    <div class="form-group">
+        <div class="form_header">First Name</div>
+        <div class="row no-gutters input_container">
+        <input type="text" class="mb-1" formControlName="firstName" class="text_input"  maxlength="80" >
+            <div class="counter_limit">
+                <div class="row no-gutters">
+                    <round-progress class="my-auto" [ngClass]="{'warning_limit': getLength('firstName')>=80}"
+                        [current]="getLength('firstName')" [max]="80" [radius]="7" [stroke]="3" [rounded]="true"
+                        [clockwise]="true" [responsive]="false" [duration]="800" [animation]="'easeInOutQuart'"
+                        [animationDelay]="0">
+                    </round-progress>   
+                    <p class="ml-2 my-auto">
+                        {{ 80 - getLength('firstName') }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form_header">Last Name</div>
+        <div class="row no-gutters input_container">
+            <input type="text" class="mb-1" formControlName="lastName" class="text_input"  maxlength="80" >
+            <div class="counter_limit">
+                <div class="row no-gutters">
+                    <round-progress class="my-auto" [ngClass]="{'warning_limit': getLength('lastName')>=80}"
+                        [current]="getLength('lastName')" [max]="80" [radius]="7" [stroke]="3" [rounded]="true"
+                        [clockwise]="true" [responsive]="false" [duration]="800" [animation]="'easeInOutQuart'"
+                        [animationDelay]="0">
+                    </round-progress>
+                    <p class="ml-2 my-auto">
+                        {{ 80 - getLength('lastName') }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form_header">Job Title</div>
+        <div class="row no-gutters input_container">
+            <input type="text" class="mb-1" formControlName="jobTitle" class="text_input"  maxlength="80" >
+            <div class="counter_limit">
+                <div class="row no-gutters">
+                    <round-progress class="my-auto" [ngClass]="{'warning_limit': getLength('jobTitle')>=80}"
+                        [current]="getLength('jobTitle')" [max]="80" [radius]="7" [stroke]="3" [rounded]="true"
+                        [clockwise]="true" [responsive]="false" [duration]="800" [animation]="'easeInOutQuart'"
+                        [animationDelay]="0">
+                    </round-progress>
+                    <p class="ml-2 my-auto">
+                        {{ 80 - getLength('jobTitle') }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <label class="form-label">Location</label>
+    <div class="form-row" formArrayName="location">
+        <div class="col">
+            <div class="form-group">
+                <label class="form-label">City</label>
+                <input type="text" class="mb-1" formControlName="state">
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label class="form-label">Country</label>
+                <input type="text" class="mb-1" [(ngModel)]="selectedCountry"  [ngModelOptions]="{standalone: true}" [typeahead]="countries" (ngModelChange)="countrySelected()">
+            </div>
+        </div>
+    </div>
+   
+</div>  
+</form>
+
+<ng-template #imageCropper>
+    <div class="modal-header">
+        <h3 class="modal-title pull-left">Upload Photo</h3>
+        <button type="button" class="close pull-right" (click)="modalRef.hide()"><span
+                aria-hidden="true">&times;</span></button>
+    </div>
+    <div class="modal-body"  *ngIf="imageChangedEvent === ''; else showImage">
+            <input type="file" (change)="fileChangeEvent($event)" hidden #uploader accept=".jpg, .JPG, .png, .PNG, .jpeg" />
+        <div class="upload_btn" (click)="uploader.click()"> 
+            <i class="far fa-images"></i>
+            <p>Select photo</p>
+        </div>
+    </div>
+    <ng-template #showImage>
+        <div class="modal-body">
+            <input type="file" (change)="fileChangeEvent($event)" hidden #uploader accept=".jpg, .JPG, .png, .PNG, .jpeg" />
+            <div class="upload_actions">
+                <button class="btn btn-outline-light" (click)="uploader.click()">Select Photo</button>
+                <div class="btn-group transform_actions">
+                    <button class="btn btn-outline-light" (click)="rotateLeft()"><i class="fa fa-rotate-left"></i></button>
+                    <button class="btn btn-outline-light" (click)="rotateRight()"><i class="fa fa-rotate-right"></i></button>
+                </div>
+            </div>
+            <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1"
+                format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+                (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()" roundCropper="true"
+                [transform]="transform" [onlyScaleDown]="true" [canvasRotation]="canvasRotation" resizeToWidth="100"
+                resizeToHeigth="100">
+            </image-cropper>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-success" (click)="uploadPhoto()" [disabled]="croppedImage ? false: true">Upload
+                Photo</button>
+        </div>
+    </ng-template>
+</ng-template>

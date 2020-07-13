@@ -1,0 +1,58 @@
+@import "../../../../../assets/scss/variables";
+
+.body-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .edit-component {
+        width: 50%;
+        .card {
+            .card-header {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .card-footer {
+                display: flex;
+                justify-content: center;
+                .btn {
+                    padding: 8px;
+                    background: $text-main-color;
+                    color: #ffffff;
+                    font-size: 1.3rem;
+                    width: 300px;
+                }
+            }
+        }
+    }
+}
+
+.avatar-panel {
+    display: flex;
+    justify-content: center;
+    .avatar-container {
+        width: 100px;
+        height: 100px;
+        position: relative;
+        .avatar {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+        }
+        .btn-fab {
+            position: absolute;
+            bottom: 0;
+            right: 10%;
+            border-radius: 50%;
+        }
+    }
+}
+
+.btn-group {
+    width: 100%;
+}
+
+.btn.btn-success {
+    width: 100%;
+}

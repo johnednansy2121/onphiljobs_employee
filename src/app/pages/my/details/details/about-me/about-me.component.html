@@ -1,0 +1,23 @@
+<form [formGroup]="profileService.detailsForm">
+    <div class="card-body">
+        <div class="form-group">
+            <div class="form-label">About me</div>
+            <div class="input_container">
+                <quill-editor (onContentChanged)="textChanged($event)" maxLength="1500"  formControlName="aboutMe" rows="10" [placeholder]="placeholderText" ></quill-editor>
+                <div class="counter_limit">
+                    <div class="row no-gutters">
+                        <round-progress class="my-auto" [ngClass]="{'warning_limit': currrentLength >=1500}"
+                            [current]="currrentLength" [max]="1500" [radius]="7" [stroke]="3" [rounded]="true"
+                            [clockwise]="true" [responsive]="false" [duration]="800" [animation]="'easeInOutQuart'"
+                            [animationDelay]="0">
+                        </round-progress>
+                        <p class="ml-2 my-auto">
+                            {{ 1500 - currrentLength }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p>To view a sample profile <a href="/profile/view/jasonbuchanan">Click Here</a></p>
+    </div>
+</form>

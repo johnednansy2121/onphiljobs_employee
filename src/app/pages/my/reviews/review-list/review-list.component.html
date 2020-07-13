@@ -1,0 +1,67 @@
+<div class="empty-state-container" *ngIf="reviewSrv.reviewItems.length <= 0; else list">
+    <i class="fas fa-box-open"></i>
+    <h5>You don't have any reviews yet.</h5>
+    <h5>Other members can give you a review when they visit your profile.</h5>
+</div>
+
+<ng-template #list>
+    <div class="container">
+
+        <div class="content__inner">
+            <header class="content__title">
+                <h1>{{ pageTitle }}</h1>
+                <small>{{ pageSubTitle }}</small>
+            </header>
+
+            <div class="row todo">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="listview listview--bordered" cdkDropList (cdkDropListDropped)="drop($event)">
+
+                            <div *ngFor="let review of reviewSrv.reviewItems" class="listview__item" cdkDrag>
+
+                                <div class="text-muted" cdkDragHandle>
+                                    <i class="fa fa-bars"></i>
+                                </div>
+
+                                <div class="checkbox checkbox--char todo__item">
+
+                                    <div class="listview__content">
+                                        <div class="listview__heading content__title__text">{{ review.metadata.owner.userName }}
+                                        </div>
+                                    </div>
+                                    <div class="list_subtitle">
+                                        <span><i>{{ review.reviewDescription }}</i></span>
+                                    </div>
+                                </div>
+
+                                <div class="actions listview__actions">
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" class="toggle-switch__checkbox" [checked]="review.isDisplayed" (click)="hideUnhide(review._id, review.isDisplayed)">
+                                            <i class="toggle-switch__helper"></i>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title content__title__text">Want to show your reviews?</h4>
+                            <h6  class="card-subtitle">All reviews are hidden by default. You may show your reviews on your profile by turning the switch on <i class="fa fa-toggle-on"></i> and to hide them again, just turn the switch off <i class="fa fa-toggle-off"></i>.</h6>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title content__title__text">Invite Fllair users to review you</h4>
+                            <h6  class="card-subtitle">{{link}}</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

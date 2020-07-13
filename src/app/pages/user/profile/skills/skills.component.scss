@@ -1,0 +1,31 @@
+.empty-state-container {
+    min-height: 45vh;
+    .empy-state-content {
+        i {
+            font-size: 7em;
+        }
+
+        a {
+            color: white;
+            width: 400px;
+        }
+    }
+}
+.timeline-sm {
+    padding: 5px 30px;
+}
+
+.list-unstyled {
+}
+
+
+.progress_bar {
+    color: rgb(50,199,135) !important;
+    background: rgba(182, 181, 181, 0.432);
+    height: .7rem;
+    margin-bottom: 10px;
+    bar  {
+        background: rgb(50,199,135) !important;
+    }
+}
+ 

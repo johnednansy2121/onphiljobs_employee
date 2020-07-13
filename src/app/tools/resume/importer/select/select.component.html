@@ -1,0 +1,12 @@
+<div
+    class="empty-state-container col-lg-12 justify-content-center text-center p-5 d-flex align-content-center flex-wrap">
+    <div class="empy-state-content">
+        <input type="file" (change)="fileChangeEvent($event)" hidden #uploader accept=".doc, .dock, .pdf, .txt" />
+        <i class="fa fa-file-o fileIcons"></i>
+        <p></p>
+        <button class="ml-auto btn content__background__theme text-white add_file"  (click)="uploader.click()">
+            Add Resume
+        </button>
+        <p class="mb-0 mt-2">.doc .dock .pdf .txt</p>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="review-container" *ngIf="reviews.length <= 0; else listItems">
+    <div class="empty-state-container col-lg-12 justify-content-center text-center p-5 d-flex align-content-center flex-wrap">
+        <div class="empy-state-content">
+            <i class="fas fa-box-open"></i>
+            <p>No Review items are currently displayed.</p>
+            <!-- <button class="ml-auto btn content__background__theme text-white review_btn" (click)="openModal(addReview)" *ngIf="isAddReview">
+                Add Review
+            </button> -->
+            <!-- <button class="ml-auto btn content__background__theme text-white review_btn" *ngIf="isAddReview">
+                Add Review
+            </button> -->
+        </div>
+    </div>
+</div>
+
+<ng-template  #listItems>
+    
+    <div class="row no-gutters pb-3 ">
+
+        <div class="content__title p-0 mb-0">
+            <h1 class="mb-4 mt-2 text-uppercase px-4">
+                <i class="fa fa-star" aria-hidden="true"></i>
+                Reviews
+            </h1>
+        </div>
+        <!-- <button class="ml-auto btn content__background__theme text-white mr-4" (click)="openModal(addReview)"  *ngIf="isAddReview">
+            Add Review
+        </button> -->
+    </div>
+    <div class="row no-gutters justify-content-center">
+        <div class="card col-lg-11 mx-2" *ngFor="let review of reviews">
+            <div class="card-header content__background__theme setPublicColor p-0">
+            </div>
+            <div class="card-body">
+                <div class="row no-gutters mb-2">
+                <h5 class="card-title mb-0 content__title__text setTextPublicColor">{{review.metadata.owner.userName}}</h5>
+                    <h6 class="ml-auto">{{review.metadata.dateCreated | date}}
+                    </h6>
+                </div>
+                <p class="card-text"><i>{{review.reviewDescription}}</i> </p>
+            </div>
+        </div>
+    </div>
+</ng-template>
+

@@ -1,0 +1,67 @@
+<div class="empty-state-container" *ngIf="diaryService.diaryItems.length <= 0; else listItems">
+    <i class="fas fa-box-open"></i>
+    <p>You don't have diary records yet.</p>
+    <a class="btn content__background__theme" [routerLink]="'/diary/create'">Add a diary entry
+        records</a>
+</div>
+
+<ng-template #listItems>
+    <div class="content__inner">
+        <header class="content__title">
+            <h1>{{ pageTitle }}</h1>
+            <small>{{ pageSubTitle }}</small>
+        </header>
+
+        <div class="row todo">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="listview listview--bordered">
+
+                        <div *ngFor="let diary of diaryService.diaryItems; let i = index;" class="listview__item">
+                            <div class="checkbox checkbox--char todo__item">
+
+                                <div class="listview__content">
+                                    <div class="listview__heading content__title__text">{{diary.title }}
+                                    </div>
+                                    <p>{{ diary.metadata.created| date:'mediumDate'}}</p>
+                                </div>
+
+                                <div class="">
+                                    <span><i>{{diary.body }}</i></span>
+                                </div>
+                            </div>
+
+                            <div class="listview__actions task-more-actions">
+                                <div class="btn-group" dropdown>
+                                    <button dropdownToggle type="button" class="btn"><i class="fas fa-ellipsis-v"
+                                            aria-controls="dropdown-basic"></i></button>
+                                    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                                        <li role="menuitem">
+                                            <button class="dropdown-item" routerLink="{{'/diary/update/' + diary._id}}">Edit</button>
+                                        </li>
+                                        <li role="menuitem">
+                                            <button class="dropdown-item" (click)="deleteDiaryEntry(diary._id)">Delete</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title content__title__text">{{ LabelTitle }}</h4>
+                        <h6 class="card-subtitle">{{ LabelSubTitle }}</h6>
+
+                        <a [routerLink]="'/diary/create'"
+                            class="btn create_educ_btn content__background__theme">Add
+                            Diary entry</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,109 @@
+
+<div class="content__inner">
+  
+        <header class="content__title">
+                <h1>{{ pageTitle }}</h1>
+                <small>{{ pageSubTitle }}
+                </small>
+                <div class="actions">
+                    <a class="btn back_btn " [routerLink]="'/jobs'"><i class="fa fa-chevron-left"></i> Back</a>
+                </div>
+              </header>
+        <div class="row todo">
+            <div class="col-md-8">
+                <div class="card">
+                    <div *ngIf="!jobModel.details.isWorkFromHome" class="mapContainer">
+                        <agm-map style="height:100%"  [latitude]="lat" [longitude]="lng" [streetViewControl]="false" [disableDefaultUI]="false" [zoom]="zoom">
+                          <!-- <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng" [markerDraggable]="false"
+                          ></agm-marker> -->
+                          <agm-circle [latitude]="lat" [longitude]="lng" 
+                              [radius]="300"
+                              [fillColor]="'red'"
+                              [circleDraggable]="false"
+                              [editable]="false">
+                          </agm-circle>
+                        </agm-map>
+                    </div>
+                    <div *ngIf="jobModel.details.isWorkFromHome" class="mapContainer">
+                        <img src="assets/img/background/wfh.png" alt="">
+                    </div>
+                    <div class="card-body">
+                        <!-- <div class="row no-gutters"> -->
+                        <h4 class="content__title__text mb-0 ">{{ jobModel.title }}</h4>
+                        <p class="mb-2">{{ jobModel.metadata.organization.name }}</p>
+                        <p>{{ jobModel.subtitle }}</p>
+                            <!-- <div class="ml-auto my-auto icon__size">
+                                <i *ngIf="job.jobSaved" class="curs_pointer fas fa-star my-auto content__title__text" (click)="saveJob()"></i>
+                                <i *ngIf="!job.jobSaved" class="curs_pointer far fa-star my-auto content__title__text" (click)="saveJob()"></i>
+                            </div> -->
+                        <!-- </div> -->
+                        <div class="row no-gutters">
+                                <div class="mt-auto">
+                                    {{ jobModel.metadata.publishDate | date:'mediumDate' }} 
+                                </div>
+                                
+                                <p *ngIf="jobModel.premium.isFeatured" class="mt-auto mb-0 ml-2">- <span class="content__title__text">Featured</span></p>
+                            </div>
+                        <hr>
+                        <p class="mb-1">Sections</p>
+                        <div class="listview listview--bordered"> 
+                
+                                <div  *ngFor="let section of jobModel.section; let i = index;" class="listview__item pl-lg-2 pl-0 py-0 pr-0" >
+                                    <div class="checkbox checkbox--char todo__item pl-1">
+                                        <div class="listview__content">
+                                            <div class="listview__heading content__title__text">{{ section.title }}</div>
+                                        </div>
+                                        <div class="">
+                                            <span><i [innerHTML]="convertToHTML(section.description)"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <hr>
+                        <i class="report-text">Don’t provide your bank or credit card details when applying for jobs. If you see something suspicious <span class="curs_pointer content__title__text">report this job
+                        ad.</span></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="mb-2">Are you ready to take this opportunity at <strong class="content__title__text">{{ jobModel.metadata.organization.name }}</strong>?</p>
+                        <a (click)="applyJob()" class="btn create_educ_btn content__background__theme">Apply for this job</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title content__title__text mb-2">Details</h4>
+                        <div>
+                        <ul class="icon-list">
+                            <li>
+                                <i class="fa fa-handshake-o"></i> {{ jobModel.details.commitment.type }}
+                            </li>
+                            <li>
+                            <i class="fa fa-money"></i> {{ jobModel.details.salary.base }} <span *ngIf="jobModel.details.salary.upper !== null">- {{ jobModel.details.salary.upper }}</span> 
+                            <strong> {{ jobModel.details.salary.currency }}</strong><span *ngIf="jobModel.details.salary.base !== null">/</span>  {{ jobModel.details.salary.type }}
+                            </li>
+                            <li>
+                                <i class="fa fa-clock-o"></i> {{ jobModel.details.commitment.duration.quantity }} {{ jobModel.details.commitment.duration.unit }}
+                            </li>
+                            <li *ngIf="jobModel.details.category !== null">
+                            <i class="fa fa-list-alt"></i> category
+                            </li>
+                            <li *ngIf="!jobModel.details.isWorkFromHome">
+                                <i class="fa fa-map-marker"></i> {{ jobModel.details.location.city }} {{ jobModel.details.location.state }}, {{ jobModel.details.location.country }}  {{ jobModel.details.location.postalCode }}
+                                 <!-- <i class="fa fa-map-marker"></i> {{ jobModel.details.location.address1 }} -->
+                              </li>
+                              <li *ngIf="jobModel.details.isWorkFromHome">
+                                  <i class="fa fa-map-marker"></i> Work from home
+              
+                                </li>
+                            </ul>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

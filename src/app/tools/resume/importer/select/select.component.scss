@@ -1,0 +1,19 @@
+.empty-state-container {
+    min-height: 45vh;
+    .empy-state-content {
+        i {
+            font-size: 7em;
+        }
+
+        a {
+            color: white;
+            width: 400px;
+        }
+    }
+}
+.add_file {
+    width: 250px;
+}
+.fileIcons {
+    -webkit-text-stroke: 2px white;
+}

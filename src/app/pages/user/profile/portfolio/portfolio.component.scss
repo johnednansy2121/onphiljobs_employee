@@ -1,0 +1,57 @@
+.empty-state-container {
+    min-height: 45vh;
+    .empy-state-content {
+        i {
+            font-size: 7em;
+        }
+
+        a {
+            color: white;
+            width: 400px;
+        }
+    }
+}
+.timeline-sm-date {
+    font-style: italic;
+}
+
+.timeline-sm .timeline-sm-item {
+    padding-bottom: 20px;
+}
+
+.timeline-sm {
+    display: block;
+    padding: 0px 30px !important;
+    li {
+        display: flex;
+    }
+}
+
+.list-unstyled {
+    padding-left: 0;
+    list-style: none;
+    width: 100%;
+}
+
+.mt-0  {
+    color: rgb(0, 197, 112);
+}
+.card-img-top {
+    min-height: 200px;
+    max-height: 200px;
+}
+.card-text {
+    color: #343a40;
+    font-size: 1.15rem;
+    font-weight: 200;
+}
+@media (max-width:481px)  { 
+    .timeline-sm-date {
+        min-width: 100px;
+        max-width: 100px;
+    }
+
+    .card-img-top {
+        height: 200px;
+    }
+}

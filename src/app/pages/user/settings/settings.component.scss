@@ -1,0 +1,40 @@
+@import "../../../../assets/scss/scss-imports";
+.profile-container {
+    .card {
+        margin-bottom: 1.5rem;
+    }
+    .list-group-item {
+        transition: .2s;
+        font-size: 1.2rem;
+        padding: 1.2rem 2rem;
+        margin-bottom: -1px;
+        background-color: rgba(0,0,0,0);
+        border: 1px solid #e8e8e9;
+        border-right: none;
+        color: $navigation-link-color;
+    }
+   .list-group-item.active  {
+       background: transparent;
+       font-weight: 500;
+       color: #000000;
+   }
+   .list-group-item:hover  {
+       transition: .2s;
+       background: rgba(226, 225, 225, 0.226);
+   }
+   .tab-content {
+       padding: 0px;
+   }
+   
+}
+
+@media (max-width: 481px)  { 
+    .page-footer {
+        display: flex;
+        flex-direction: row;
+        padding-bottom: 20px;
+       .btn {
+           width: 50%;
+       }
+   }
+}

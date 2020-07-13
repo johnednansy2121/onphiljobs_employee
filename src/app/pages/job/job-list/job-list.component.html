@@ -1,0 +1,116 @@
+<div class="page">
+
+    <header class="content__title">
+        <h1>{{ pageTitle }}</h1>
+        <small>{{ pageSubTitle }}</small>
+    </header>    
+    <div class="page-body">
+        <div class="card noPadding">
+            <div class="py-3">
+                <div class="row no-gutters tool-labels">
+                    <div class="col-md-6">
+                        <div class="content__title__text toolbar__label mb-2 pl-0 pl-lg-2">What</div>
+                    </div>
+                    <div class="col-md-6 pl-0 pl-lg-3">
+                        <div class="content__title__text toolbar__label mb-2">Where</div>
+                    </div>
+                </div>
+               <div class="col-md-12 px-2 row no-gutters inputs__container ">
+                   <div class="col-12 col-md-6 pr-3 mb-2 mb-md-0">
+                        <input type="text" [(ngModel)]="titleSearch" (keydown.enter)="executeSearch()" placeholder="Enter Keywords" class="text_input input__area col-12 px-2">
+                   </div>
+                   <div class="col-md-2 x-0 my-auto pl-0 pl-lg-3 pb-2 pb-md-0">
+                       <div class="form-group m-auto">
+                           <div class="checkbox" (click)="setMap()">
+                           <input type="checkbox" id="gridCheck" name="chk_WFH" [(ngModel)]="this.sharedSrv.isDisabled"  >
+                               <label class="checkbox__label" for="gridCheck">
+                                   Working from home
+                               </label>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="col-sm-12 mb-2 mb-md-0 col-md-2 px-0">
+                        <div class="row no-gutters col-sm-12 col-lg-12 p-0 pl-lg-1">
+
+                            <div class="btn-group col-12" dropdown #dropdown="bs-dropdown" [autoClose]="true" [insideClick]="true" placement="left">
+                                <button dropdownToggle type="button" [disabled]="this.sharedSrv.isDisabled" class="btn content__background__theme col-12 px-4 text-white my-auto btn_search dropdown-toggle">
+                                    Location <span class="caret"></span>
+                                </button>
+                                <div *dropdownMenu class="dropdown-menu dropdown-menu-right py-0" role="menu">
+                                    <div>
+                                        <app-maps></app-maps>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class=" col-md-2 pl-0 pl-lg-2">
+                        <button class="btn content__background__theme col-12 px-0 text-white my-auto btn_search " (click)="executeSearch()">Search Job</button>
+                    </div>
+               </div>
+               
+            </div>
+            <div class="card-body noPadding">
+                <div class="listview listview--bordered"  *ngIf="jobList.length > 0; else showNoResults">
+                    <p class="pl-4 mb-0" *ngIf="searchedJob"> {{ jobList.length }} jobs found</p>
+                    <div *ngFor="let job of jobList; let i = index" class="listview__item" [ngClass]="{content__highlight: job.isFeatured}">
+                        <div class="listview__content">
+                            <h1 class="curs_pointer listview__heading content__title__text mb-0" [routerLink]="'/jobs/view/' + job._id">{{job.title}}</h1>
+                            <p class="mb-3">{{ job.metadata.organization }}</p>
+                            <p class="col-lg-7 px-0 text-wrap">{{job.subtitle}}</p>
+                            <div class="mt-2">
+                                <div>
+                                    <div class="mt-auto" *ngIf="job.location.city">
+                                        <i class="fa fa-map-marker icon__list"></i> {{ job.location.city }} {{ job.location.state }}, {{ job.location.country }} 
+                                    </div>
+                                    
+                                    <div class="mt-auto" *ngIf="!job.location.city">
+                                        <i class="fa fa-map-marker icon__list"></i> {{ job.location }}
+                                    </div>
+                                </div>
+                                <div class="row no-gutters">
+                                    <div class="mt-auto" *ngIf="job.metadata.publishedDate">
+                                        <i class="fa fa-clock-o icon__list"></i> {{ job.metadata.publishedDate | date:'mediumDate' }} -
+                                    </div>
+                                    
+                                    <p *ngIf="job.isFeatured" class="mt-auto mb-0 ml-2"> <span class="content__title__text">Featured</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="issue-tracker__item actions mb-auto">
+                            <div class="btn-group" dropdown>
+                                <button dropdownToggle type="button" class="btn"><i class="fas fa-ellipsis-v"
+                                        aria-controls="dropdown-basic"></i></button>
+                                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="button-basic">
+                                    <li role="menuitem">
+                                        <button class="dropdown-item" [routerLink]="'/jobs/view/' + job._id">View</button>
+                                    </li>
+                                    <li role="menuitem">
+                                        <button class="dropdown-item">Save</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="clearfix m-4"></div>
+                    
+                    <mat-paginator (page)="changePage($event)" [pageSize]="searchQuery.pageSize" [length]="jobList.length" [pageSizeOptions]="[5, 10, 25, 100]">
+                    </mat-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template  #showNoResults>
+    <div class="listview listview--bordered listview--hover">
+        <div class="p-5    m-auto text-center">
+            <i class="fas fa-search search__font__size"></i>
+            <p class="mb-0 mt-2">It looks like theres no one here,</p>
+            <p>please try searching again</p>
+        </div>
+    </div>
+</ng-template>

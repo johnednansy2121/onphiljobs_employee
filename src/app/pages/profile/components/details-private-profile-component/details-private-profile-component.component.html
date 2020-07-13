@@ -1,0 +1,32 @@
+<div class="col-lg-12">
+    <div class="row" *ngIf="profile.videoUrl">
+      <iframe class="m-auto" width="95%" height="315" [src]="url" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  
+    <div class="row mt-2 p-2">
+  
+      <div class="col-12">
+        <div [innerHTML]="aboutMe" class="aboutMe"></div>
+      </div>
+  
+    </div>
+  
+</div>
+
+<div class="p-lg-3 p-sm-2 p-2 ">
+    <div class="row quick-stats">
+        <div *ngFor="let stat of quickStatsData" class="col-sm-6 col-md-3">
+            <div [class]="['quick-stats__item']" [style.background]="stat.color">
+                <div class="quick-stats__info">
+                    <h2>{{ stat.number }}</h2>
+                    <small>{{ stat.title }}</small>
+                </div>
+        
+                <div class="quick-stats__chart">
+                        <i [class]="stat.icon"></i>
+                </div>
+        
+            </div>
+        </div>
+        </div>
+</div>

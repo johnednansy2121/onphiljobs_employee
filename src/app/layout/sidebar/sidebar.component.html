@@ -1,0 +1,37 @@
+<!--<ng-scrollbar shown="hover" compact="true">-->
+<perfect-scrollbar [autoPropagation]="true">
+
+  <app-sidebar-user></app-sidebar-user>
+
+  <ul class="navigation">
+    <li *ngFor="let menu of mainMenu; let i = index" [class.navigation__sub]="menu.sub" routerLinkActive="navigation__active">
+      <!-- Router link for non sub menu  -->
+      <a [ngClass]="[menu.class ||'']" *ngIf="!menu.sub" [routerLink]="[menu.route]" (click)="menu.sub && toggleSubMenu(i)">
+<!--        <i [ngClass]="['zmdi zmdi-'+menu.icon]"></i>-->
+        <i [ngClass]="['fas fa-fw fa-'+menu.icon]"></i>
+        {{ menu.title }}
+          <span *ngIf="menu.promote" class="badge badge-light" style="padding: 0.3em !important;">Soon!</span>
+      </a>
+
+        <!-- / -->
+
+      <!-- Menu toggle for sub menu -->
+      <a [ngClass]="[menu.class ||'']"  *ngIf="menu.sub" (click)="menu.sub && toggleSubMenu(i)">
+<!--        <i [ngClass]="['zmdi zmdi-'+menu.icon]"></i>-->
+        <i [ngClass]="['fas fa-fw fa-'+menu.icon]"></i>
+        {{ menu.title }}
+      </a>
+      <!-- / -->
+
+      <ul [ngClass]="[menu.class ||'']"  *ngIf="menu.sub" [@toggleSubMenu]="menu.visibility">
+        <li *ngFor="let sub of menu.sub" routerLinkActive="navigation__active">
+          <a [ngClass]="[sub.class ||'']" *ngIf="(sub.premium ==( profile | async)?.premium.hasProSubscription) || !sub.premium" [routerLink]="[sub.route]">
+            <i *ngIf="sub.icon" [ngClass]="['fas fa-fw fa-'+sub.icon]"></i> {{ sub.title }}
+          </a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+</perfect-scrollbar>
+<!--</ng-scrollbar>-->

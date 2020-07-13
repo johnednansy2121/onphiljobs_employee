@@ -1,0 +1,21 @@
+<div class="content__inner">
+    <header class="content__title">
+        <h1>{{ pageTitle }}</h1>
+        <small>{{ pageSubTitle }}</small>
+    </header>
+<div class="row todo">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header p-0">
+                <div class="row no-gutters">
+                    <div class="col-4 text-center p-3 curs_pointer transitions border__box" *ngFor="let tab of tabs" [routerLinkActive]="['content__background__theme', 'text-white']"
+                                            [routerLink]="[tab.tabRoute]"><span class="">{{ tab.tabName }}</span></div>
+                </div>
+            </div>
+            <div class="card-body">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

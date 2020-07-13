@@ -1,0 +1,100 @@
+
+    .pie_chart_sec_1 {
+        width: 100%;
+        margin: 0px 10px;
+        padding: 10px;
+        background: #ffffff;
+        display: flex !important;
+        flex-direction: row !important;
+        .main_chart {
+            width: 70%;
+        }
+    }
+
+.chart {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    justify-content: center;
+    border: 1px solid rgba(37, 37, 37, 0.322);
+    border-radius: 10px;
+    margin-left: 5px;
+    .chart_container {
+        margin: 0 auto;
+        .data_chart {
+        .data_chart_text {
+            display: inline-flex;
+            margin: 0px 10px;
+            text-align: center;
+            .data_chart_color {
+                width: 25px;
+                height: 20px;
+                border-radius: 15px;
+            }
+            .data_chat_legend {
+                margin-left: 7px;
+                }
+            }
+        }  
+    }
+
+}
+
+.card-body {
+    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, 0.274)!important;
+}
+
+@media (max-width:481px)  { 
+    .pie_chart_sec_1 {
+        width: 100%;
+        margin: 0px !important;
+    }
+    .chart {
+    width: 100% !important;
+    display: flex;
+    margin-top: 0px !important;
+    padding-bottom: 0px !important;
+    .chart_container {
+        border: none !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        margin: 0px !important;
+        .data_chart {
+            margin: 0 auto;
+                .data_chart_text {
+                    .data_chart_color {
+                    }
+                    .data_chat_legend {
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media (min-width:1920px), (max-width:1280px)  { 
+     .pie_chart_sec_1 {
+         flex-direction: column !important;
+        .main_chart {
+            width: 100% !important;
+            justify-content: center;
+        }
+        .chart {
+            width: 100% !important;
+            padding: 20px;
+            border: none;
+            .chart_container {
+                width: 50% !important;
+                justify-content: center;
+                padding: 20px;
+                display: inline-flex;
+                border: 1px solid rgba(37, 37, 37, 0.322);
+                border-radius: 10px;
+            }
+        }
+    }
+
+    
+}

@@ -1,0 +1,46 @@
+<div [attr.data-ma-theme]="env.theme">
+<div class="body_container content__gradient__background">
+    <div class="login_container">
+        <div class="login">
+            <div class="card">
+                <div class="card-body">
+                    <div class="verify_content" *ngIf="!verified && !notVerified">
+                        <div class="verify_header content__background__theme"><i class="fa fa-user"></i> Account Verification</div>
+                        <div class="verify_body"><p>
+                            Please verify your account in your email account.
+                        </p>
+                        <div class="subtitle">
+                            <div class="loader content__border__top__color"></div>
+                            Waiting for Account Verification.
+                        </div>
+                        </div>
+                    </div>
+                    <div class="verify_content" *ngIf="verified && !notVerified">
+                        <div class="verify_header content__background__theme"> <i class="fa fa-user"></i> Account Verified!</div>
+                        <div class="verify_body">
+                            <p> 
+                               Thank you for verifying your account,
+                            </p>
+                            <p>
+                                you may now setup your profile.
+                            </p>
+                            <div class="verified_button">
+                                <button class="content__background__theme" (click)="continue()">Continue to Fllair</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="verify_content" *ngIf="notVerified">
+                        <div class="verify_header"> <i class="fa fa-user"></i> Account not Verified!</div>
+                        <div class="verify_body">
+                            <p>
+                               Please try to verify your account again.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

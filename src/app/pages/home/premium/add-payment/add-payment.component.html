@@ -1,0 +1,91 @@
+
+<div class="body-container">
+    <div class="page col-sm-12 col-md-10 col-lg-7">
+        <header class="content__title">
+            <h1 class="">Add Payment Method</h1>
+            <div class="actions">
+                <a class="btn back_btn" (click)="backToPayment()"><i class="fa fa-chevron-left"></i> Back</a>
+            </div>
+        </header>
+
+        <div class="page-body">
+            <div class="card">
+                <form [formGroup]="addForm">
+                <div class="card-details p-4">
+                    <h2 class="content__title__text">
+                        Card Info
+                    </h2>
+                    <div class="form-group ">
+                        <label class="form-label">Card Number</label>
+                        <input type="text" class="mb-1  col-lg-12" formControlName="cardNumber" required maxlength="255">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Account Name</label>
+                        <input type="text" class="mb-1 col-lg-12" formControlName="accountName" required maxlength="255">
+                    </div>
+                    <div class="row no-gutters">
+                        <div class="row no-gutters col-lg-6">
+                            <div class="form-group col-lg-6">
+                                <label  class="form-label">Expiry Month</label>
+                                <input class="mb-1 mx-2 col-lg-10" formControlName="expiryMonth" placeholder="MM" type="text" required maxlength="255">
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label class="form-label">Expiry Year</label>
+                                <input class="mb-1 mx-2 col-lg-10" formControlName="expiryYear" placeholder="YYYY" type="text" required maxlength="255">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label">CVC</label>
+                                <input class="mb-1 col-lg-12" formControlName="cvc" placeholder="###" type="text" required maxlength="3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-details p-4">
+                    <h2 class="content__title__text">
+                        Billing Address
+                    </h2>
+                    <div class="form-group ">
+                        <label class="form-label">Address Line 1</label>
+                        <input type="text" class="mb-1  col-lg-12" formControlName="address1" required maxlength="255">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Address Line 2</label>
+                        <input type="text" class="mb-1 col-lg-12" formControlName="address2" maxlength="255">
+                    </div>
+                    <div class="row no-gutters">
+                        <div class="row no-gutters col-lg-10">
+                            <div class="form-group col-lg-6">
+                                <label class="form-label">City</label>
+                                <input class="mb-1 mx-2 col-lg-10" formControlName="city" type="text" required maxlength="255">
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label class="form-label">State</label>
+                                <input class="mb-1 mx-2 col-lg-10" formControlName="state" type="text" required maxlength="255">
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label class="form-label">Postal Code</label>
+                                <input class="mb-1 col-lg-12" formControlName="postalCode" type="text" required maxlength="255">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="page-footer col-lg-12 my-3">
+                    <button class="col-lg-12 btn content__background__theme" (click)="submitPaymentMethod()">Save</button>
+                </div>
+            </form>
+                <div class="card-footer">
+                    <div class="pull-right">
+                        <img src="assets/img/stripe/powered_by_stripe.png" height="26" width="119"/>
+                    </div>
+                </div>
+            </div>
+            <small class="pull-left">* All payments are handled securely by stripe, Fllair does not store your card details.</small>
+
+        </div>
+    </div>
+</div>

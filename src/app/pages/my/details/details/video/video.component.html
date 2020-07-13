@@ -1,0 +1,28 @@
+<form [formGroup]="profileService.detailsForm">
+    <div class="card-body" >
+        <div class="form-group">
+            <div class="form_header">Video Url</div>
+            <div class="row no-gutters input_container">
+                <input type="text" class="mb-1" formControlName="videoUrl" class="text_input"  maxlength="500" >
+                <div class="counter_limit">
+                    <div class="row no-gutters">
+                        <round-progress class="my-auto" [ngClass]="{'warning_limit': getLength('videoUrl')>=500}"
+                            [current]="getLength('videoUrl')" [max]="500" [radius]="7" [stroke]="3" [rounded]="true"
+                            [clockwise]="true" [responsive]="false" [duration]="800" [animation]="'easeInOutQuart'"
+                            [animationDelay]="0">
+                        </round-progress>
+                        <p class="ml-2 my-auto">
+                            {{ 500 - getLength('videoUrl') }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Instructions</label>
+            <p class="indent">Adding a short video is a great way to tell you story in a way that stands out.  To do this, simply create a video, upload it to YouTube, and then add the URL of the YouTube Video above.  For more information about how to create and upload a great Fllair profile Video,
+                <a routerLink="/blog/get-started/8">Click Here</a>
+            </p>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,77 @@
+<div class="empty-state-container" *ngIf="portfolioServ.portfolioItems.length <= 0; else listItems">
+    <i class="fas fa-box-open"></i>
+    <p>You don't have any portfolio items yet.</p>
+    <a class="btn content__background__theme" [routerLink]="'/my/portfolio/add'">Add to your Portfolio</a>
+</div>
+
+<ng-template #listItems>
+    <div class="content__inner">
+        <header class="content__title">
+            <h1>{{ pageTitle }}</h1>
+            <small>{{ pageSubTitle }}</small>
+        </header>
+
+        <div class="row todo">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="listview listview--bordered" cdkDropList (cdkDropListDropped)="drop($event)">
+                        <div *ngFor="let portfolio of portfolioServ.portfolioItems; let i = index;" class="listview__item" cdkDrag>
+
+                            <div class="text-muted" cdkDragHandle>
+                                <i class="fa fa-bars"></i>
+                            </div>
+
+                            <div class="checkbox checkbox--char todo__item">
+                                <div class="photos" >
+                                    <div class="item" >
+                                        <img [src]="portfolio.itemImageUrl"/>
+                                    </div>
+                                </div>
+                                <div class="listview__content">
+                                    <div class="listview__heading content__title__text">{{ portfolio.itemName }}
+                                    </div>
+                                    <div class="">
+                                        <span><i>{{ portfolio.itemDescription }}</i></span>
+                                        <div class="pl-3 row listview__attrs">
+                                            <span *ngFor="let tag of portfolio.tags">{{tag}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="listview__actions task-more-actions">
+                                <div class="btn-group" dropdown>
+                                    <button dropdownToggle type="button" class="btn"><i class="fas fa-ellipsis-v"
+                                            aria-controls="dropdown-basic"></i></button>
+                                    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                                        <li role="menuitem">
+                                            <button class="dropdown-item" routerLink="{{'/my/portfolio/update/' + portfolio._id}}">Edit</button>
+                                        </li>
+                                        <li role="menuitem">
+                                            <button class="dropdown-item" (click)="remove(portfolio._id)">Delete</button>
+                                        </li>
+                                        <li role="menuitem">
+                                            <button class="dropdown-item" (click)="markAsProtectedUnprotected(portfolio._id)">{{portfolio.isProtected ? 'Mark as Unprotected' : 'Mark as Protected'}}</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title content__title__text">{{ portfolioLabelTitle }}</h4>
+                        <h6 class="card-subtitle">{{ portfolioLabelSubTitle }}</h6>
+
+                        <a [routerLink]="'/my/portfolio/add'" class="btn create_educ_btn content__background__theme">Add
+                            Portfolio</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

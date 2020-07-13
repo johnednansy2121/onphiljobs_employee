@@ -1,0 +1,84 @@
+@import "../../../../../assets/scss/variables";
+
+.loading_text {
+    font-size: 1.5rem;
+    margin-top: 10px;
+    color: $white;
+}
+.form-group {
+    label {
+        color: $text-main-color;
+    }
+}
+.body-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .edit-component {
+        width: 80%;
+        .card-footer {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                margin-bottom: 10px;
+                background-color: transparent !important;
+                padding: 5px 0px;
+                .btn {
+                    width: 20%;
+                    float: right;
+                    padding: 8px;
+                    margin-left: auto;
+                    background: $text-main-color;
+                    color: #ffffff;
+                    font-size: 1.3rem;
+                    background: $text-main-color;
+                }
+            }
+    }
+}
+
+
+
+@media (max-width:481px)  { 
+    .card-footer {
+        .btn {
+            width: 100% !important;
+            font-size: 1.2rem !important;
+        }
+    }
+}
+
+.avatar-panel {
+    display: flex;
+    justify-content: center;
+    .avatar-container {
+        width: 100px;
+        height: 100px;
+        position: relative;
+        .avatar {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+        }
+        .btn-fab {
+            position: absolute;
+            bottom: -5px;
+            right: 10%;
+            border-radius: 50%;
+            border: 1px solid #2525 !important;
+            box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+            background: #32c787;
+            color: #FFFFFF;
+            padding: 5px 10px;
+        }
+    }
+}
+
+.btn-group {
+    width: 100%;
+}
+
+.btn.btn-success {
+    width: 100%;
+}

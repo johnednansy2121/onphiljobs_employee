@@ -1,0 +1,26 @@
+@import "../../../../../../assets/scss/scss-imports";
+.card-body {
+    border: 1px solid #e8e8e9;
+    .form-group {
+        input, textarea {
+            display: block;
+            width: 100%;
+            height: calc(1.54em + .876rem + 2px);
+            padding: .438rem .875rem;
+            font-size: .894rem;
+            font-weight: 400;
+            line-height: 1.54;
+            color: #4E5155;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid rgba(24,28,33,0.1);
+            border-radius: .25rem;
+        }
+        textarea {
+            height: 100%;
+        }
+    }
+}
+.card-body:first-child {
+    border-bottom: 0px !important;
+}

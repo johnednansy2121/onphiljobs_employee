@@ -1,0 +1,136 @@
+.page {
+    width: 100%;
+}
+.noPadding {
+    padding: 0px !important;
+}
+.tool-labels {
+}
+.icon__list {
+    width: 15px
+}
+.listview__heading {
+    width: fit-content !important;
+}
+.page-header {
+    grid-area: ph;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-header {
+    display: grid;
+    grid-template-columns: 90% 10%;
+
+    .actions-group {
+        display: flex;
+        justify-content: center;
+    }
+}
+.action_icons {
+    font-size: 1.3rem;
+    -webkit-text-stroke: .8px #ffffff;
+}
+.search__font__size {
+    font-size: 8rem;
+    -webkit-text-stroke: 2px white;
+}
+.page-body {
+    grid-area: pb;
+}
+
+.page-sidebar {
+    grid-area: ps;
+}
+.toolbar {
+    height: 100% !important;
+    padding: 0.05rem 1.5rem 0;
+}
+.sidebar_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.toolbar__label {
+    font-size: 1.5rem;
+}
+.empty-state {
+    display: flex;
+    justify-content: center;
+}
+
+::ng-deep {
+    .ng-select-container {
+        position: relative;
+        top: -5px;
+        border: none !important;
+    }
+    .ng-select:before, .ng-select:after {
+        background: none !important;
+    }
+    .ngx-select__toggle {
+        top: -1px !important;
+    }
+    .btn_search {
+        height: calc(1.54em + 1.5rem + 0px);
+    }
+    .ng-select, .input__area {
+        height: calc(1.54em + 1.5rem + 0px);
+        padding: .438rem .875rem;
+        font-size: 13.5px;    
+        font-weight: 400;
+        line-height: 1.54;
+        color: #333;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ccc;
+        border-radius: .25rem;
+    }
+}
+
+.task-more-actions {
+    grid-area: "more";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.details-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    .details-item {
+        padding-top: 1.2em;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+}
+
+.modal-footer {
+    button {
+        width: 100%;
+    }
+}
+.listview__heading {
+    font-size: 1.5rem;
+}
+.curs_pointer {
+    cursor: pointer;
+}
+
+@media (max-width: 768px)  { 
+    .tool-labels {
+        display: none !important;
+    }
+    .inputs__container {
+        width: 100% !important;
+    }
+    .toolbar {
+        display: block !important;
+    }
+    .dropdown-menu-right {
+        width: 100% !important;
+    }
+}

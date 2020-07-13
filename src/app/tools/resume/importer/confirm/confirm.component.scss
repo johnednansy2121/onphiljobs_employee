@@ -1,0 +1,15 @@
+@import "../../../../../assets/scss/variables";
+.content_color {
+    color: #676767;
+}
+.page-footer {
+       .save_btn, .btn-outline-light {
+            color: #ffffff;
+            padding: 5px 15px;
+       }
+        .btn-outline-light {
+            margin-left: 5px;
+            color: $navigation-link-color !important;
+            border-color: lighten($navigation-link-color, 30%);
+       }
+   }

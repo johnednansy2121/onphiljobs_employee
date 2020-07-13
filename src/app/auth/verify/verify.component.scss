@@ -1,0 +1,172 @@
+@import "../../../assets/scss/variables";
+
+.body_container {
+    background: $gradient-theme-background;
+    height: 100vh;
+    width: 100%;
+}
+
+.login {
+    width: 40%;
+    margin: auto;
+    .card {
+        height: 100%;
+        width: 100%;
+        border-radius: 5px;
+        box-shadow: $main-card-shadow!important;
+        .card-body {
+            padding: 0px !important;
+            width: 100%;
+            display: flex;
+            .verify_content {
+                width: 100%;
+                .verify_header {
+                    background: $text-main-color;
+                    color: $white;
+                    width: 100%;
+                    padding: 20px;
+                    font-size: 2rem;
+                    i {
+                        margin-right: 8px;
+                    }
+                }
+                .verify_body {
+                    padding: 30px;
+                    font-size: 1.5rem;
+                    text-align: center;
+                    width: 100%;
+                    p { margin-bottom: 5px; }
+                    .subtitle {
+                        font-size: 1rem;
+                        display: flex;
+                        flex-direction: row;
+                        width: 100%;
+                        justify-content: center;
+                        .loader {
+                            border: 3px solid #f3f3f3;
+                            border-radius: 50%;
+                            border-top: 3px solid $text-main-color;
+                            width: 20px;
+                            height: 20px;
+                            margin-right: 10px;
+                            -webkit-animation: spin 1s linear infinite;
+                            animation: spin 1s linear infinite;
+                            }
+                    }
+                    .verified_button {
+                        width: 100%;
+                        justify-content: center;
+                        margin-top: 30px;
+                        button {
+                            padding: 10px 20px;
+                            font-size: 1.3rem;
+                            background: $text-main-color;
+                            border: none;
+                            box-shadow: $card-shadow;
+                            color: $white;
+                            width: 60%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+/* Mobile Phones */
+@media (max-width:689px)  { 
+    .login {
+        width: 100%;
+        padding: 10px !important;
+        .card {
+            width: 100%;
+            padding: 0px !important;
+            height: 100% !important;
+            .card-body {
+                padding: 0px !important;
+                width: 100%;
+                display: block;
+        }
+        }
+    }
+}
+
+@media (max-width: 1280px )  { 
+.login {
+    .card {
+        height: 100%;
+        width: 1000px;
+        }
+    }
+}
+
+
+@media (max-width: 1000px )  { 
+.login {
+    .card {
+        height: 100%;
+        width: 700px;
+        .card-body {
+            
+        }
+        }
+    }
+}
+
+@media (min-width: 3840px ), (min-width: 4096px )  {
+    .login {
+        .card {
+            height: 100%;
+            width: 80%;
+        .card-body {
+            .verify_content {
+                width: 100%;
+                .verify_header {
+                    font-size: 5rem !important;
+                    padding: 50px;
+                }
+                .verify_body {
+                    padding: 30px;
+                    font-size: 4rem;
+                    text-align: center;
+                    width: 100%;
+                    p { margin-bottom: 5px; }
+                    .subtitle {
+                        font-size: 3rem;
+                        display: flex;
+                        flex-direction: row;
+                        width: 100%;
+                        justify-content: center;
+                        .loader {
+                            border: 5px solid #f3f3f3;
+                            border-radius: 50%;
+                            border-top: 5px solid;
+                            width: 50px;
+                            height: 50px;
+                            margin-right: 30px;
+                            -webkit-animation: spin 1s linear infinite;
+                            animation: spin 1s linear infinite;
+                            }
+                        }
+                    .verified_button {
+                        padding: 10px;
+                        button {
+                            font-size: 3rem;
+                        }
+                    }
+                    }
+                }
+                }
+                }
+            }
+}

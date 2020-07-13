@@ -1,0 +1,71 @@
+<div class="body-container">
+    <div class="page col-sm-12 col-md-10 col-lg-8">
+        <header class="content__title">
+            <h1 class=""> Edit Achievement </h1>
+            <div class="actions">
+                <a class="btn back_btn" [routerLink]="'/my/achievements'"><i class="fa fa-chevron-left"></i> Back</a>
+            </div>
+        </header>
+
+        <div class="page-body">
+            <form [formGroup]="achievementForm">
+                <div class="card">
+                    <div class="card-body ">
+                        <div class="formItem">
+                            <div class="form_header">Achievement Name</div>
+                            <div class="input_container">
+                                <input formControlName="achievementName" type="text" class="form-control text_input" maxlength="80" InputFloat>
+                                <div class="counter_limit">
+                                    <div class="row no-gutters">
+                                        <round-progress class="my-auto" [ngClass]="{'warning_limit': getLength('achievementName')>=80}"
+                                            [current]="getLength('achievementName')" [max]="80" [radius]="7" [stroke]="3" [rounded]="true"
+                                            [clockwise]="true" [responsive]="false" [duration]="800" [animation]="'easeInOutQuart'"
+                                            [animationDelay]="0">
+                                        </round-progress>
+                                        <p class="ml-2 my-auto">
+                                            {{ 80 - getLength('achievementName') }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group formItem">
+                            <div class="form_header ">Time Period</div>
+                            <div class="time_period">
+                                <input placeholder="mm/dd/yyyy" class="form-control" type="text"
+                                    formControlName="dateStarted" bsDatepicker>
+                                <p>to</p>
+                                <input placeholder="mm/dd/yyyy" class="form-control" type="text"
+                                    formControlName="dateFinished" bsDatepicker>
+                            </div>
+                        </div>
+                        <div class="form-group formItem">
+                            <div class="form_header mr-1">Description</div>
+                            <div class=" input_container">
+                                <textarea formControlName="achievementDescription" autosize class="form-control text_area_input"
+                                    rows="10" maxlength="500"></textarea>
+                                <div class="counter_limit">
+                                    <div class="row no-gutters">
+                                        <round-progress class="my-auto"
+                                            [ngClass]="{'warning_limit': getLength('achievementDescription')>=500}"
+                                            [current]="getLength('achievementDescription')" [max]="500" [radius]="7" [stroke]="3"
+                                            [rounded]="true" [clockwise]="true" [responsive]="false" [duration]="800" [animation]="'easeInOutQuart'"
+                                            [animationDelay]="0">
+                                        </round-progress>
+                                        <p class="ml-2 my-auto">
+                                            {{ 500 - getLength('achievementDescription') }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="page-footer">
+                            <button class="btn content__background__theme" (click)="submit()" [disabled]="!achievementForm.valid">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,15 @@
+<div class="row quick-stats">
+<div *ngFor="let stat of quickStatsData" class="col-sm-6 col-md-3">
+    <div [class]="['quick-stats__item']" [style.background]="stat.color">
+        <div class="quick-stats__info">
+            <h2>{{ stat.number }}</h2>
+            <small>{{ stat.title }}</small>
+        </div>
+
+        <div class="quick-stats__chart">
+                <i [class]="stat.icon"></i>
+        </div>
+
+    </div>
+</div>
+</div>

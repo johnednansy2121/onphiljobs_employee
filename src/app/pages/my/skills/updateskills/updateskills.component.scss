@@ -1,0 +1,153 @@
+@import "../../../../../assets/scss/variables";
+::ng-deep  .warning_limit {
+	svg path {
+		stroke: red !important;
+	}
+}
+.text_input {
+	padding-right: 50px;
+}
+.text_area_input{
+	padding-bottom: 20px;
+}
+.input_container {
+	position: relative;
+	.counter_limit  {
+		position: absolute;
+		bottom: 7px;
+		right: 0px;
+	}
+}
+.body-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+
+    .page {
+
+        .content__title {
+			margin-bottom: 1rem !important;
+            h1 {
+				font-size: 1.2rem;
+			}
+            .actions {
+                .back_btn {
+					color: $red;
+					font-size: 1.1rem;
+					position: relative;
+					right: -20px;
+                }
+            }
+        }
+        .page-body {
+            padding-top: 1.2em;
+            display: grid;
+            grid-template-columns: 100%;
+            grid-row-gap: 20px;
+						form {
+							.formItem {
+            	width: 90%;
+                margin: 15px auto;
+                .radio_group {
+					display: block;
+					margin-top: 5px;
+					width: 100%;
+					.radio_btn {
+                        color: $white !important;
+                        width: 20%;
+                    }
+				}
+            	.form_header {
+                	font-size: 1.2rem;
+                	margin-bottom: 2px;
+                	font-weight: 400;
+                	text-align: left;
+            	}
+            	.time_period {
+                	display: flex;
+                	flex-direction: row;
+                	width: 100%;
+                	margin-left: 5px;
+                	input {
+                    	width: 42.5%;
+                	}
+                	p {
+                    	margin: auto 5%;
+											}
+									}
+
+								
+							}
+						}
+        }
+        
+    }
+}
+.page-footer {
+	width: 100%;
+	text-align: center;
+	margin-top: 40px;
+        .btn {
+			width: 70%;
+			font-size: 1.2rem;
+			color: #ffffff;
+        }
+    }
+.card-body {
+	position: relative;
+	overflow: hidden;
+}
+.card-footer {
+	text-align: right;
+	button {
+		color: #ffffff;
+		margin: auto 5px;
+	}
+}
+
+.mark {
+    position: absolute;
+    width: 350px;
+    height: 10px;
+    transform: rotate(140deg);
+    top: 5px;
+    bottom: -20px;
+    left: -120px;
+}
+
+@media (min-width: 1280px)  { 
+	.formItem {
+        width: 95% !important;
+			.radio_group {
+				.radio_btn {
+				color: $white !important;
+				width: 16.6% !important;
+				}
+				.radio_btn:nth-child(3), .radio_btn:nth-child(5) {
+					width: 25% !important;
+				}
+			}
+	}
+}
+
+@media (max-width: 1000px)  { 
+	.content__title {
+        padding: 1rem 0px 0px 0px !important;
+    }
+}
+@media (max-width: 750px)  { 
+
+    .formItem {
+        width: 100% !important;
+			.radio_group {
+                display: block;
+				.radio_btn {
+                    width: 100% !important;
+				}
+			}
+    }
+    .content__title {
+        padding: 1rem 0px 0px 0px !important;
+    }
+}

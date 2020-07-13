@@ -1,0 +1,191 @@
+<div [attr.data-ma-theme]="env.theme">
+    <div class="content__gradient__background body_container">
+
+    <div class="login_container">
+        <div class="login">
+            <div class="card">
+                <div class="card-body">
+                    <app-auth-leftpanel class="left-panel"></app-auth-leftpanel>
+                    <div class="right_panel">
+                        <div  *ngIf="isRequestProcess === 0">
+                            <div class="form__container">
+                            <div class="panel_title">
+                            <img src="assets/img/logos/fllair-logo-transparent.png" alt="" class="content__background__theme logo mx-auto">
+                                <h4 class="card-title content__title__text">Join Us!</h4>
+                                <h6 class="card-subtitle">Please enter your account information.
+                                </h6>
+                            </div>
+                            <form [formGroup]="signupForm" class="login_body">
+                                <div class="error_tip" *ngIf="(f.userName.value === null || f.email.value === null) && errorMessage.message !== ''">
+                                    {{ errorMessage.message }}</div>
+                                <div class="form-group form-group--float form-group--centered">
+                                    <i class="fa fa-user content__title__text"></i>
+                                    <input minlength="3" (input)="checkCharacters($event)" [ngStyle]="{'border-bottom':f.userName.value === null  && errorMessage.type === 'name' ? '2px solid red' : '' }" formControlName="userName" type="text" class="form-control" InputFloat required (keydown.enter)="signUp()" >
+                                    <div class="help__icon">
+                                        <i class="far fa-question-circle"  placement="right" tooltip="Username must contain only A-Z a-z 0-9 . _- and no white spaces"></i>
+                                    </div>
+                                    <label>User Name</label>
+                                    <i class="form-group__bar"></i>
+                                </div>
+
+                                <div class="form-group form-group--float form-group--centered">
+                                    <i class="fa fa-envelope content__title__text"></i>
+                                    <input [ngStyle]="{'border-bottom':f.email.value === null  && errorMessage.type === 'email' ? '2px solid red' : '' }" formControlName="email" type="text" class="form-control" InputFloat required (keydown.enter)="signUp()" >
+                                    <div class="password_confirm" *ngIf="f.email.errors && f.email.value !== ''">
+                                        <i class="fa fa-times"></i>
+                                    </div>
+                                    <div class="help__icon">
+                                        <i class="far fa-question-circle" placement="right" tooltip="Email address must be a valid email" ></i>
+                                    </div>
+                                    <label>Email Address</label>
+                                    <i class="form-group__bar"></i>
+                                </div>
+                                    <!-- <div class="input-group-prepend">
+                                        <button class="btn btn-danger" *ngIf="!isVerified" (click)="openModal()">Verify</button>
+                                        <button class="btn btn-success" *ngIf="isVerified"><i class="fas fa-check" style="color: white; font-size: 11px;"></i>&nbsp;Verified</button>
+                                    </div> -->
+                                <div class="form-group form-group--float form-group--centered">
+                                    <i class="fa fa-lock content__title__text"></i>
+                                    <input formControlName="password" type="password" class="form-control" autocomplete="on"
+                                        InputFloat required (keydown.enter)="signUp()"  >
+                                    <div class="password_confirm" *ngIf="f.password.value.length >= 6">
+                                        <i class="fa fa-check"></i>
+                                    </div>
+                                    <div class="help__icon">
+                                        <i class="far fa-question-circle" placement="right" tooltip="Password must be be at least 6 characters and contain only A-Z a-z 0-9 and symbols"></i>
+                                    </div>
+                                    <label>Password</label>
+                                    <i class="form-group__bar"></i>
+                                </div>
+                                <div class="form-group form-group--float form-group--centered">
+                                    <i class="fa fa-lock content__title__text"></i>
+                                    <input   formControlName="confirm" type="password" class="form-control" autocomplete="on" InputFloat required (keydown.enter)="signUp()" >
+                                    <div class="password_confirm" *ngIf="f.password.value.length >= 6 && f.confirm.value.length >= 6">
+                                        <i class="fa fa-check" *ngIf="f.password.value !== null && f.password.value === f.confirm.value"></i>
+                                        <i class="fa fa-times" *ngIf="f.password.value !== null && f.password.value !== f.confirm.value"></i>
+                                    </div>
+                                    <div class="help__icon">
+                                        <i class="far fa-question-circle"  placement="right" tooltip="Confirm password must match password field"></i>
+                                    </div>
+                                    <label>Confirm Password</label>
+                                    <i class="form-group__bar"></i>
+                                </div>
+                            </form>
+                            <div class="forgot_password">
+                                <p routerLink="/auth/forgot" class="content__title__text">Forgot Password?</p>
+                            </div>
+                            <div class="login_button">
+                                <button [disabled]="formErrorHandler" type="button" class="btn content__background__theme col-12"
+                                    (click)="signUp()">Register</button>
+                            </div>
+
+                            <div class="line_separ">
+                                <hr class="content__background__theme">
+                            </div>
+
+                            <div class="sign_up">
+                                <p> Already have an account? <span routerLink="/auth/login" class="content__title__text">Sign in now!</span></p>
+                            </div>
+                            </div>
+                            <div class="footer__link mt-5">
+                                <div class="footer__container m-3 mr-0 mt-5">
+
+                                            Need help send us a message <a class="btn-sm content__background__theme" href="javascript:void(Tawk_API.toggle())"><i class="far fa-comments"></i>Talk with us</a>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="isRequestProcess === 1" class="requestDone">
+                            <div class="panel_title">
+                                <!-- <form [formGroup]="twoFAForm"> -->
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <label>Do you want to turn on 2 Factor Authentication?</label>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="checkbox checkbox--inline">
+                                                <input id="checkbox1" (click)="toggleOn2FA(true)" [checked]="on2FA" type="checkbox">
+                                                <label class="curs_pointer checkbox__label" for="checkbox1">Yes</label>
+                                            </div>
+                                            <div class="checkbox checkbox--inline">
+                                                <input id="checkbox2" (click)="toggleOn2FA(false)"  [checked]="!on2FA" type="checkbox">
+                                                <label class="curs_pointer checkbox__label" for="checkbox2">No</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 pt-4">
+                                            <label>Mobile Number</label>
+                                        </div>
+                                        <div class="col-sm-12 pt-0 mt-0">
+                                            <div class="mb-2">
+                                                <ngx-intl-tel-input
+                                                [cssClass]="'mobile__input'"
+                                                [preferredCountries]="[CountryISO.Australia, CountryISO.UnitedKingdom]"
+                                                [enableAutoCountrySelect]="false"
+                                                [enablePlaceholder]="true"
+                                                [searchCountryFlag]="true"
+                                                [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                                                [selectFirstCountry]="false"
+                                                [selectedCountryISO]="CountryISO.Australia"
+                                                [maxLength]="15"
+                                                [tooltipField]="TooltipLabel.Name"
+                                                [phoneValidation]="true"
+                                                name="phone"
+                                                (input)="validate()"
+                                                [(ngModel)]="phone"></ngx-intl-tel-input>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <div class="modal_button">
+                                    <div class="row no-gutters">
+                                        <div class="text-right col-12 pb-3 col-lg-6 px-1 col-md-6">
+                                            <button class="col-12 col-lg-8 btn content__background__theme" (click)="openModal(verificationModal)" [disabled]="!on2FA" *ngIf="!isVerified">Verify Phone</button>
+                                            <button class="col-12 col-lg-8 btn btn-success" *ngIf="isVerified"><i class="fas fa-check"></i>&nbsp;&nbsp;Verified</button>
+                                        </div>
+                                        <div class="text-left col-12 col-lg-6 px-1 col-md-6">
+                                            <button class="col-12 col-lg-8 btn content__background__theme" [disabled]="!isValid2FAForm" (click)="signUp()" type="button">Register</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="isRequestProcess === 2" class="requestDone">
+                            <div class="panel_title">
+                                <img src="assets/img/logos/fllair-logo-transparent.png" alt="" class="content__background__theme logo mx-auto">
+                                <h4 class="card-title content__title__text">Please check your email!</h4>
+                                <h6 class="card-subtitle">Your account has been created. Please check your <span class="highlight">email</span>
+                                    to verify your
+                                    account.
+                                </h6>
+                                
+                                <div class="modal_button">
+                                    <button class="button content__background__theme" (click)="done()">Done</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<ng-template #verificationModal>
+    <div class="modal-header">
+        <h3 class="modal-title pull-left">Verify Phone</h3>
+        <button type="button" class="close pull-right" (click)="modalRef.hide()"><span
+                aria-hidden="true">&times;</span></button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group form-group--float form-group--centered">
+            <input [(ngModel)]="verificationCode" class="form-control" InputFloat>
+            <label>Verification Code</label>
+            <i class="form-group__bar"></i>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" (click)="verifyPhone()">Submit</button>
+    </div>
+</ng-template>

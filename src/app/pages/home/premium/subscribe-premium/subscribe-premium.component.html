@@ -1,0 +1,129 @@
+<!--If the user doesnt have a subscription-->
+<div *ngIf="!(profile | async)?.premium.hasProSubscription">
+    <div class="content__inner">
+        <header class="content__title">
+            <h1>Membership Plans</h1>
+            <small>Introductory pricing is locked in as long as you remain a member.</small>
+        </header>
+
+        <app-jumbotron
+                       title="Limited Time Discount"
+                       message="Use Coupon Code 50OFF"
+                       details="To celebrate the launch of Flliar and all of our wonderful new users we're offering a 50% off coupon for the lifetime of your subscription. Use coupon code 50OFF when checking out to take advantage of this great opportunity to further your career.">
+        </app-jumbotron>
+
+        <div class="row price-table justify-content-center no-gutters">
+            <div *ngFor="let plan of plans | slice: 0:3; let i = index;" class="col-md-4">
+                <div class="price-table__item">
+                    <header [class]="['price-table__header bg-']+colors[i]">
+                        <div class="price-table__title">{{ planFeatures[plan.id].title }}</div>
+                    </header>
+                    <div class="price-table__price color-teal">
+                        <div *ngIf="plan.isFree">
+                            FREE
+                        </div>
+                        <div *ngIf="!plan.isFree">
+                            ${{plan.amount/100}}
+                            <small>/{{plan.currency}} per {{plan.interval}}</small>
+                        </div>
+
+                    </div>
+
+                    <ul class="price-table__info">
+                        <li *ngFor="let feature of planFeatures[plan.id].features">{{ feature }}</li>
+                    </ul>
+
+
+                    <div *ngIf="!plan.isFree">
+                        <button (click)="navigate(plan.id)" [class]="['btn price-table__action bg-']+colors[i]">Select Plan</button>
+                    </div>
+                    <div *ngIf="plan.isFree">
+                        <button disabled="true" [class]="['btn price-table__action bg-']+colors[i]">Included</button>
+                    </div>
+<!--                    <span *ngIf="i===0; else availablePlan">-->
+<!--                        <button (click)="unsubscribe()" [disabled]="!profileSrv.profile.premium.hasProSubscription" [class]="['btn price-table__action bg-']+colors[i]">Select Plan</button>-->
+<!--                    </span>-->
+<!--                    <ng-template #availablePlan>-->
+<!--                        <button *ngIf="profileSrv.profile.premium.hasProSubscription; else selectPlan" (click)="unsubscribe()" [routerLink]=""-->
+<!--                                [class]="['btn price-table__action bg-']+colors[i]">Unsubscribe</button>-->
+<!--                        <ng-template #selectPlan>-->
+<!--                            <button (click)="navigate(plan.id)" [class]="['btn price-table__action bg-']+colors[i]">Select Plan</button>-->
+<!--                        </ng-template>-->
+<!--                    </ng-template>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--if the user has a subscription-->
+<div *ngIf="(profile | async)?.premium.hasProSubscription">
+    <div class="content__inner">
+        <header class="content__title">
+            <h1>Manage Your Membership</h1>
+            <small>Here are the details of your current subscription.</small>
+        </header>
+
+        <div class="row px-3">
+
+            <div class="col-4">
+                <div class="price-table justify-content-center h-100">
+                    <div class="price-table__item">
+                        <header [class]="['price-table__header bg-']+colors[1]">
+                            <div class="price-table__title">{{ planFeatures[selectedPlan.id].title }}</div>
+                        </header>
+                        <div class="price-table__price color-teal">
+                            <div>
+                                Includes
+                            </div>
+<!--                            <small>per {{selectedPlan.interval}}</small>-->
+                        </div>
+                        <ul class="price-table__info">
+                            <li *ngFor="let feature of planFeatures[selectedPlan.id].features">{{ feature }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+
+                <div class="price-table justify-content-center h-100">
+
+                    <div class="price-table__item">
+
+                        <header [class]="['price-table__header bg-']+colors[1]">
+                            <div class="price-table__title">Subscription Settings</div>
+                        </header>
+
+                        <div class="">
+                            You are currently subscribed to the <strong>{{planFeatures[selectedPlan.id].title}}</strong> plan.
+                            <p *ngIf="(profile | async)?.premium.subscription.isCancelled">
+                                Your subscription has been cancelled and you <b>won't be</b> charged again.
+                                The premium benefits associated with your subscription remain in effect for <b>{{remainingDays}} day/s</b>.
+                            </p>
+                            <div *ngIf="!(profile | async)?.premium.subscription.isCancelled">
+                                <p>
+                                    Thank you for being a Fllair premium member, your plan will automatically renew in <b>{{remainingDays}} day/s</b> and your plan benefits will continue automatically.
+                                </p>
+                                <p>
+                                    If you cancel your plan your premium benefits will remain active for <b>{{remainingDays}} day/s</b>.
+                                </p>
+                            </div>
+
+                            <div class="">
+                                <button *ngIf="!(profile | async)?.premium.subscription.isCancelled" (click)="unsubscribe()" [routerLink]=""
+                                        [class]="['btn price-table__action bg-']+colors[1]">Cancel Subscription</button>
+                                <button *ngIf="(profile | async)?.premium.subscription.isCancelled" (click)="unsubscribe()" [routerLink]=""
+                                        [class]="['btn price-table__action bg-']+colors[1]" disabled>Cancelled Subscription</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+</div>

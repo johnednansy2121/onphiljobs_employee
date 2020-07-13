@@ -1,0 +1,44 @@
+version: 0.2
+
+  #env:
+  #variables:
+  # key: "value"
+  # key: "value"
+  #parameter-store:
+  # key: "value"
+  # key: "value"
+  #secrets-manager:
+  # key: secret-id:json-key:version-stage:version-id
+  # key: secret-id:json-key:version-stage:version-id
+  #exported-variables:
+  # - variable
+  # - variable
+#git-credential-helper: yes
+
+phases:
+  install:
+    commands:
+      - echo Installing node modules
+      - npm install -g @angular/cli@~9.0.4
+      - npm install
+#  pre_build:
+#    commands:
+#     - echo TEST 2
+  build:
+    commands:
+     - echo Proceeding to build angular project
+     - ng build ${BUILD_FLAGS}
+  post_build:
+    commands:
+     - echo Deploying Build
+     - aws s3 rm s3://${S3_BUCKET} --recursive
+     - aws s3 cp dist/MyEmployeeLife s3://${S3_BUCKET} --recursive
+artifacts:
+  files:
+   - '**/*'
+#  name: $(date +%Y-%m-%d)
+#  discard-paths: yes
+  base-directory: dist/MyEmployeeLife
+  #cache:
+  #paths:
+  # - paths

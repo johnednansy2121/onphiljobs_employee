@@ -1,0 +1,83 @@
+<div class="empty-state-container" *ngIf="experienceSrv.experienceItems.length <= 0; else listItems">
+    <i class="fas fa-box-open"></i>
+    <p>You don't have work experience recorded yet.</p>
+    <a class="btn content__background__theme" [routerLink]="'/my/experiences/insertMany'">Add to your Work Experience</a>
+</div>
+
+<ng-template #listItems>
+    <div class="content__inner">
+        <header class="content__title">
+            <h1>{{ pageTitle }}</h1>
+            <small>{{ pageSubTitle }}</small>
+        </header>
+
+        <div class="row todo">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="listview listview--bordered" cdkDropList (cdkDropListDropped)="drop($event)">
+
+                        <div *ngFor="let experience of experienceSrv.experienceItems; let i = index;" class="listview__item" cdkDrag>
+                            <div class="text-muted" cdkDragHandle>
+                                <i class="fa fa-bars"></i>
+                            </div>
+
+                            <div class="checkbox checkbox--char todo__item">
+
+                                <div class="listview__content">
+                                    <div class="listview__heading content__title__text">{{experience.organizationName }}
+                                    </div>
+                                    <h3>{{experience.jobTitle}}</h3>
+                                    <p>{{ experience.dateStarted | date:'mediumDate'}} - 
+                                        <span *ngIf="experience.dateFinished !== null && experience.dateFinished !== ''; else presentTime ">{{experience.dateFinished | date:'mediumDate'}}</span>
+                                        <ng-template #presentTime>Current</ng-template></p>
+                                </div>
+
+                                <div class="">
+                                    <span><i>{{experience.jobDescription }}</i></span>
+                                </div>
+                            </div>
+
+                            <div class="listview__actions task-more-actions">
+                                <div class="btn-group" dropdown >
+                                    <button id="button-alignment" dropdownToggle type="button" class="btn"><i class="fas fa-ellipsis-v" aria-controls="dropdown-alignment"></i>
+                                    </button>
+                                    <ul *dropdownMenu class="dropdown-menu" role="menu"
+                                        aria-labelledby="button-alignment">
+                                        <li role="menuitem">
+                                            <button class="dropdown-item" routerLink="{{'/my/experiences/update/' + experience._id}}">Edit</button>
+                                        </li>
+                                        <li role="menuitem">
+                                            <button class="dropdown-item" (click)="deleteExperience(experience._id)">Delete</button>
+                                        </li>
+                                        <li role="menuitem">
+                                            <button class="dropdown-item"
+                                                (click)="markAsProtectedUnprotected(experience._id)">{{experience.isProtected ? 'Mark as Unprotected': 'Mark as Protected'}}</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- <div class="btn-group" dropdown placement="bottom right">
+                                    <button dropdownToggle type="button" class="btn"></button>
+                                    <ul id="dropdown-alignment" *dropdownMenu class="dropdown-menu " role="menu" aria-labelledby="button-alignment">
+                                     
+                                    </ul>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title content__title__text">{{ experienceLabelTitle }}</h4>
+                        <h6 class="card-subtitle">{{ experienceLabelSubTitle }}</h6>
+
+                        <a [routerLink]="'/my/experiences/insertMany'" class="btn create_educ_btn content__background__theme">Add
+                            Experience</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

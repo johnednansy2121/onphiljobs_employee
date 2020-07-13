@@ -1,0 +1,21 @@
+<div class="user">
+  <div class="user__info" (click)="userMenu = !userMenu" [class.active]="userMenu">
+    <img class="user__img" [src]="(profile | async)?.displayPicture == null || (profile | async)?.displayPicture == ''? './assets/demo/img/profile-pics/8.jpg' : (profile | async)?.displayPicture" alt="">
+    <div class="row no-gutters row__actions">
+      <div class="row no-gutters col-lg-12">
+        <div class="user__name">{{(profile | async)?.firstName}} {{(profile | async)?.lastName}}</div>
+        <div class="user__email">{{(profile | async)?.jobTitle}}</div>
+        <div class="mr-2 ml-auto">
+          <i class="fa fa-caret-down" *ngIf="!userMenu"></i>
+          <i class="fa fa-caret-up" *ngIf="userMenu"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="userMenu" [@toggleUserMenu]="userMenu" class="user__menu">
+    <a  [routerLink]="'/profile/view/' + sessionService.currentUser.userName" routerLinkActive="content__title__text">View Profile</a>
+    <a  routerLink="/settings"  routerLinkActive="content__title__text">Settings</a>
+    <a [routerLink]="" (click)="authService.logout()">Logout</a>
+  </div>
+</div>

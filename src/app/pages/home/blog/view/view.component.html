@@ -1,0 +1,46 @@
+<div class="content__inner">
+    <div class="row">
+        <div class="col-lg-8 col-md-7">
+            <div class="card">
+                <div class="card-body" [innerHtml]="sanitizer.bypassSecurityTrustHtml(post.content.rendered)"></div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-5">
+            <div class="card">
+                <div class="card-body p-0">
+                    <img *ngIf="post._embedded['wp:featuredmedia']" class="card-img-top" [src]="post._embedded['wp:featuredmedia'][0].source_url" alt="">
+
+                    <div class="p-4">
+                    <h4 class="card-title">{{ post.title.rendered }}</h4>
+                    <h6 class="card-subtitle">by Admin</h6>
+                    <button *ngIf="hasCommand" type="button" (click)="testpopfunction()"
+                    class="btn content__background__theme p-lg-2 setPublicColor col-lg-12 mx-1 my-2 text-white challenge_btn">
+                        <i class="fa fa-fire mr-1"></i> Take the challenge
+                    </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #addconfirm>
+    <div class="modal-header">
+        <h3 class="modal-title pull-left">Are you sure?</h3>
+        <button type="button" class="close pull-right" (click)="this.dismissModal(false)">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="details-content">
+            <div class="details-item">
+                <span>Warning you are about to import {{commandJson.tasks.length}} tasks to your account.</span>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" (click)="this.dismissModal(true)" >Okay, Import Tasks</button>
+    </div>
+</ng-template>

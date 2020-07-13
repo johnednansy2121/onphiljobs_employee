@@ -1,0 +1,80 @@
+<div class="body-container">
+    <div class="page col-sm-12 col-md-10 col-lg-8">
+        <header class="content__title">
+            <h1 class=""> Edit Task </h1>
+            <div class="actions">
+                <a class="btn back_btn" [routerLink]="'/tasks'"><i class="fa fa-chevron-left"></i> Back</a>
+            </div>
+        </header>
+
+        <div class="page-body">
+            <div class="card">
+                <div class="col-lg-12">
+                    <form [formGroup]="editForm">
+
+                        <div class="formItem">
+                                <div class="form_header">Task Name</div>
+                                <div class="row no-gutters input_container">
+                                    <input formControlName="name" type="text" class="form-control text_input" maxlength="80" InputFloat>
+                                    <div class="counter_limit">
+                                        <div class="row no-gutters">
+                                            <round-progress class="my-auto" [ngClass]="{'warning_limit': getLength('name')>=80}"
+                                                [current]="getLength('name')" [max]="80" [radius]="7" [stroke]="3" [rounded]="true"
+                                                [clockwise]="true" [responsive]="false" [duration]="800" [animation]="'easeInOutQuart'"
+                                                [animationDelay]="0">
+                                            </round-progress>
+                                            <p class="ml-2 my-auto">
+                                                {{ 80 - getLength('name') }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="formItem">
+                            <div class="form_header mr-1">Notes</div>
+                            <div class="row no-gutters input_container">
+                                <textarea formControlName="notes" autosize class="form-control text_area_input" rows="5" maxlength="500"></textarea>
+                                <div class="counter_limit">
+                                    <div class="row no-gutters">
+                                        <round-progress class="my-auto" [ngClass]="{'warning_limit': getLength('notes')>=500}"
+                                            [current]="getLength('notes')" [max]="500" [radius]="7" [stroke]="3" [rounded]="true" [clockwise]="true"
+                                            [responsive]="false" [duration]="800" [animation]="'easeInOutQuart'" [animationDelay]="0">
+                                        </round-progress>
+                                        <p class="ml-2 my-auto">
+                                            {{ 500 - getLength('notes') }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="formItem">
+                            <div class="form_header">Due Date</div>
+                        <input placeholder="mm/dd/yyyy" class="form-control" type="text" formControlName="dueDate" bsDatepicker>
+                        </div>
+                        <div class="formItem row no-gutters mt-2">
+                            <div class="checkbox listview__checkbox my-auto mx-0">
+                                <input type="checkbox" id="listview-1" formControlName="isCompleted">
+                                <label for="listview-1" class="checkbox__label mt-1"></label>
+                            </div>
+                            <div class="form_header">Is Completed</div>
+                        </div>
+                    </form>
+                    <div class="tags_group">
+                        <div class="formItem">
+                            <div class="form_header">Tags</div>
+                            <input type="text" [typeahead]="suggestedTags" placeholder="Hit enter to add tag" [(ngModel)]="selectedTag"
+        class="form-control" (keyup.enter)="addTag()" InputFloat>
+                        </div>
+                        <div class="tag-list row listview__attrs">
+                            <span *ngFor="let tag of editTags">{{tag}}<button class="btn" (click)="removeTag(tag)"><i
+                                        class="fas fa-times"></i></button></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-footer">
+                    <button class="btn content__background__theme" (click)="submitEdit()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

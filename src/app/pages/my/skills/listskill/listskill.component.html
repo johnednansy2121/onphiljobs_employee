@@ -1,0 +1,71 @@
+<div class="empty-state-container" *ngIf="skillService.skillItems.length <= 0; else list">
+    <i class="fas fa-box-open"></i>
+    <h5>You don't have skills saved yet.</h5>
+    <a [routerLink]="'/my/skills/insertMany'" class="btn content__background__theme">Add Skill</a>
+</div>
+
+<ng-template #list>
+
+    <div class="content__inner">
+        <header class="content__title">
+            <h1>{{ pageTitle }}</h1>
+            <small>{{ pageSubTitle }}</small>
+        </header>
+    
+        <div class="row todo">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="listview listview--bordered" cdkDropList (cdkDropListDropped)="drop($event)">
+    
+                        <div *ngFor="let skill of skillService.skillItems; let i = index;" class="listview__item" cdkDrag>
+
+                            <div class="text-muted" cdkDragHandle>
+                                <i class="fa fa-bars"></i>
+                            </div>
+
+                            <div class="checkbox checkbox--char todo__item">
+    
+                                <div class="listview__content">
+                                    <div class="listview__heading content__title__text">{{ skill.skillName }}
+                                    </div>
+                                    <progressbar [value]="skill.skillLevel*20" class="progress_bar content__title__text" type="success"></progressbar>
+                                </div>
+
+                            </div>
+
+                            <div class="listview__actions  task-more-actions">
+                                <div class="btn-group" dropdown>
+                                    <button dropdownToggle type="button" class="btn"><i class="fas fa-ellipsis-v"
+                                            aria-controls="dropdown-basic"></i></button>
+                                    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                                        <li role="menuitem">
+                                            <button class="dropdown-item" routerLink="{{'/my/skills/update/' + skill._id}}">Edit</button>
+                                        </li>
+                                        <li role="menuitem">
+                                            <button class="dropdown-item" (click)="delete(skill._id)">Delete</button>
+                                        </li>
+                                        <li role="menuitem">
+                                            <button class="dropdown-item" (click)="markAsProtectedUnprotected(skill._id)">{{skill.isProtected ? 'Mark as Unprotected': 'Mark as Protected'}}</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title content__title__text">More Skills to add?</h4>
+                        <h6 class="card-subtitle">You may add more of your Skills, just click the button below</h6>
+    
+                        <a [routerLink]="'/my/skills/insertMany'" class="btn create_educ_btn content__background__theme">Add
+                            Skills</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </ng-template>

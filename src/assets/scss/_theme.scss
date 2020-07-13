@@ -1,0 +1,122 @@
+@import "./variables";
+
+// Theming
+@mixin ma-theme($color) {
+  .content__highlight {
+    border-left: 3px solid $color;
+  }
+  .spinner_color {
+    .overlay {
+      div {
+        color: $color !important;
+      }
+    }
+  }
+  .buttom__outline__theme__white {
+    border: 1px solid #ffffff;
+    transition: .2s;
+  }
+  .buttom__outline__theme__white:hover {
+    background: #ffffff;
+    color: $color !important;
+    transition: .2s;
+  }
+  .bs-datepicker-container .bs-datepicker-head {
+    background-color: $color !important;
+  }
+  .form-group__bar {
+  &:before, &:after {
+    background-color: $color !important;
+  }
+}
+
+.content__border__top__color {
+  border-top-color: $color !important;
+}
+.checkbox > input[type=checkbox]:checked ~ .checkbox__label:before {
+    background-color: $color !important;
+    border-color: darken($color, 10%)
+}
+.form-group--float {
+  .form-control {
+      &:focus {
+        & ~ label {
+          color: $color !important;
+        }
+      }
+    }
+    .form-control.form-control:valid ~ label {
+        color: $color !important;
+    }
+}
+
+  .content__gradient__background {
+    background: linear-gradient(to top, $color, lighten($color, 20%)) !important;
+  }
+
+  .header,
+  .login__block__header,
+  .login__block__btn,
+  .top-menu,
+  .content__background__theme,
+  .progress-bar,.ngx-select__item_active {
+    background-color: $color !important;
+  }
+  .navigation__sub--active > a,
+  .navigation__active > a,
+  .navigation__active:before,
+  .content__title__text {
+    color: $color !important;
+  }
+  .content__background__theme__lighten {
+    background-color: lighten( $color, 10% ) !important;
+  }
+
+  .border_theme {
+    border-color: $color !important;
+  }
+  .btn.active {
+    background-color: darken( $color, 15% ) !important;
+  }
+  .btn-outline-theme {
+    border-color: $color !important;
+    color: $color !important;
+  }
+  .btn-outline-theme:hover {
+    background: $color !important;
+    color: #ffffff !important;
+  }
+  .timeline-sm-item:after {
+    border-color: $color !important;
+  }
+  .timeline-ball-theme {
+    background-image: -webkit-radial-gradient(-23px 50%, circle closest-corner, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 55px,  $color 56px,  $color 57px);
+  }
+}
+
+$themes: (
+  red: $red,
+  purple: $purple,
+  indigo: $indigo,
+  blue: $blue,
+  cyan: $cyan,
+  teal: $teal,
+  green: $green,
+  brown: $brown,
+  orange: $orange,
+  blue-grey: $blue-grey
+
+);
+
+@each $theme, $value in $themes {
+  [data-ma-theme="#{$theme}"] {
+    @include ma-theme($value);
+  }
+}
+
+.theme-switch {
+  .btn-group--colors {
+    display: block;
+    margin-top: 0.75rem;
+  }
+}

@@ -1,0 +1,91 @@
+<div class="body-container">
+    <div class="edit-component">
+        <div class="card">
+            <div class="card-header">
+                <h4>Edit Profile</h4>
+                <a routerLink="/my/details" class="btn btn-danger">Back</a>
+            </div>
+            <div class="card-body">
+                <div class="avatar-panel">
+                    <div class="avatar-container">
+                        <img [src]="profile.displayPicture == '' || profile.displayPicture == null ? './assets/demo/img/profile-pics/8.jpg' : profile.displayPicture"
+                            class="avatar" />
+                        <button class="btn-fab" (click)="openModal(imageCropper)">
+                            <i class="fas fa-pencil-alt"></i>
+                        </button>
+                    </div>
+                </div>
+                <form [formGroup]="editProfileForm" class="profile-form">
+                    <div class="form-group form-group--float">
+                        <input type="text" formControlName="firstName" class="form-control" InputFloat required>
+                        <label>First Name</label>
+                        <i class="form-group__bar"></i>
+                    </div>
+                    <div class="form-group form-group--float">
+                        <input type="text" formControlName="lastName" class="form-control" InputFloat required>
+                        <label>Last Name</label>
+                        <i class="form-group__bar"></i>
+                    </div>
+                    <div class="form-group form-group--float">
+                            <input type="text" formControlName="videoUrl" class="form-control" InputFloat>
+                            <label>Video URL</label>
+                            <i class="form-group__bar"></i>
+                        </div>
+                        <div class="form-group form-group--float">
+                            <input type="text" formControlName="twitter" class="form-control" InputFloat>
+                            <label>twitter URL</label>
+                            <i class="form-group__bar"></i>
+                        </div>
+                        <div class="form-group form-group--float">
+                            <input type="text" formControlName="instagram" class="form-control" InputFloat>
+                            <label>instagram URL</label>
+                            <i class="form-group__bar"></i>
+                        </div>
+                        <div class="form-group form-group--float">
+                            <input type="text" formControlName="linkedin" class="form-control" InputFloat>
+                            <label>linkedin URL</label>
+                            <i class="form-group__bar"></i>
+                        </div>
+                        <div class="form-group form-group--float">
+                            <input type="text" formControlName="facebook" class="form-control" InputFloat>
+                            <label>facebook URL</label>
+                            <i class="form-group__bar"></i>
+                        </div>
+                    <div class="form-group">
+                        <label>About Me</label>
+                        <textarea formControlName="aboutMe" autosize class="form-control" InputFloat required></textarea>
+                        <i class="form-group__bar"></i>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <button class="btn" (click)="submit()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #imageCropper>
+        <div class="modal-header">
+            <h3 class="modal-title pull-left">Change Display Photo</h3>
+            <button type="button" class="close pull-right" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <input type="file" (change)="fileChangeEvent($event)" hidden #uploader accept=".jpg, .JPG, .png, .PNG, .jpeg" />
+            <button type="button" class="btn btn-primary" (click)="uploader.click()">Select Photo</button>
+            <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1" format="png" (imageCropped)="imageCropped($event)"
+                (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()" roundCropper="true"
+                [transform]="transform" [onlyScaleDown]="true" [canvasRotation]="canvasRotation" resizeToWidth="100" resizeToHeigth="100">
+            </image-cropper>
+            <div class="btn-group">
+                <button class="btn btn-primary" (click)="rotateLeft()">Rotate Left</button>
+                <button class="btn btn-primary" (click)="rotateRight()">Rotate Rigth</button>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-success" (click)="uploadImage()">Upload Photo</button>
+        </div>
+    </ng-template>
+
+</div>

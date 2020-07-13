@@ -1,0 +1,77 @@
+<div class="body-container">
+    <div class="page col-sm-12 col-md-12 col-lg-10">
+        <header class="content__title">
+            <h1 class=""> Edit Skills </h1>
+            <div class="actions">
+                <a class="btn back_btn" [routerLink]="'/my/skills'"><i class="fa fa-chevron-left"></i> Back</a>
+            </div>
+        </header>
+
+        <div class="page-body">
+            <form [formGroup]="skillForm">
+                <div class="card">
+                    <div class="card-body ">
+                        <div class="formItem">
+                            <div class="form_header">Skill Name</div>
+                            <div class="row no-gutters input_container">
+                                <input formControlName="skillName" type="text" class="form-control text_input" maxlength="80" InputFloat>
+                                <div class="counter_limit">
+                                    <div class="row no-gutters">
+                                        <round-progress class="my-auto" [ngClass]="{'warning_limit': getLength('skillName')>=80}"
+                                            [current]="getLength('skillName')" [max]="80" [radius]="7" [stroke]="3" [rounded]="true"
+                                            [clockwise]="true" [responsive]="false" [duration]="800" [animation]="'easeInOutQuart'"
+                                            [animationDelay]="0">
+                                        </round-progress>
+                                        <p class="ml-2 my-auto">
+                                            {{ 80 - getLength('skillName') }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="formItem form-group">
+                            <div class="form_header">Level</div>
+                            <div class="btn-group radio_group" btnRadioGroup formControlName="skillLevel">
+                                <label  [class.active]="getActiveTab(1)" class="btn content__background__theme radio_btn" 
+                                    btnRadio="1" tabindex="0" role="button" >Study Only</label>
+                                <label  [class.active]="getActiveTab(2)" class="btn content__background__theme radio_btn" 
+                                    btnRadio="2" tabindex="0" role="button" >Beginner</label>
+                                <label  [class.active]="getActiveTab(3)" class="btn content__background__theme radio_btn" 
+                                    btnRadio="3" tabindex="0" role="button">Intermediate</label>
+                                <label [class.active]="getActiveTab(4)" class="btn content__background__theme radio_btn" 
+                                    btnRadio="4" tabindex="0" role="button" >Expert</label>
+                                <label [class.active]="getActiveTab(5)" class="btn content__background__theme radio_btn" 
+                                    btnRadio="5" tabindex="0" role="button">Instructor</label>
+                            </div>
+                        </div>
+                        <div class="formItem">
+                            <div class="form_header ">Years of Experience</div>
+                            <input type="number" min="1" formControlName="yearsOfExperience" class="form-control" InputFloat required>
+                        </div>
+                        <div class="formItem">
+                            <div class="form_header mr-1">Notes</div>
+                            <div class="row no-gutters input_container">
+                                <textarea formControlName="notes" autosize class="form-control text_area_input" rows="10" maxlength="500"></textarea>
+                                <div class="counter_limit">
+                                    <div class="row no-gutters">
+                                        <round-progress class="my-auto" [ngClass]="{'warning_limit': getLength('notes')>=500}"
+                                            [current]="getLength('notes')" [max]="500" [radius]="7" [stroke]="3" [rounded]="true"
+                                            [clockwise]="true" [responsive]="false" [duration]="800" [animation]="'easeInOutQuart'"
+                                            [animationDelay]="0">
+                                        </round-progress>
+                                        <p class="ml-2 my-auto">
+                                            {{ 500 - getLength('notes') }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="page-footer">
+                            <button class="btn content__background__theme" (click)="submit()" [disabled]="!skillForm.valid">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

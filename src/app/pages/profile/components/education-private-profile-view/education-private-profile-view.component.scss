@@ -1,0 +1,56 @@
+@import "../../../../../assets/scss/scss-imports";
+.empty-state-container {
+    min-height: 45vh;
+    .empy-state-content {
+        i {
+            font-size: 7em;
+        }
+
+        a {
+            color: white;
+            width: 400px;
+        }
+    }
+}
+.timeline-sm .timeline-sm-item {
+    position: relative;
+    font-size: 1.15rem !important;
+    p {
+        font-weight: 500;
+        color: $navigation-link-color;
+        letter-spacing: 1px;
+    }
+}
+.list-unstyled {
+    padding-left: 0;
+    list-style: none;
+    width: 100%;
+}
+
+.sub_texts {
+    color: darken($navigation-link-color, 10%)
+}
+
+.setPublicColor  {
+  background-color: $green;
+}
+.setTextPublicColor {
+    color: $green;
+}
+@media (max-width:481px)  { 
+    .timeline-sm-date {
+        min-width: 100px;
+        max-width: 100px;
+    }
+
+    .head_title {
+        display: block;
+    }
+    .education_text {
+        font-size: 1.1rem !important;
+    }
+
+    .timeline-sm .timeline-sm-item {
+        font-size: 1rem !important;
+    }
+}

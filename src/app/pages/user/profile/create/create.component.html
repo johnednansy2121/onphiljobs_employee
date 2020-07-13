@@ -1,0 +1,109 @@
+<div [attr.data-ma-theme]="env.theme">
+<div class="body-container content__gradient__background">
+    <div class="profile-form-container">
+        <div class="card">
+            <div class="card-body">
+                <div class="mark content__background__theme">
+
+                </div>
+                <div class="panel-header">
+                    <h1>Hi!</h1>
+                    <p>Lets start setup your <span class="highlight content__title__text">profile</span> by telling us about
+                     <span class="highlight content__title__text">yourself.</span></p>
+                </div>
+                <div class="avatar-panel">
+                    <div class="avatar-section">
+                        <img class="avatar" [src]="profileImage == '' ? './assets/demo/img/profile-pics/8.jpg' : profileImage" alt="">
+                        <button (click)="openModal(imageCropper)"><i class="fas fa-pencil-alt"></i></button>
+                    </div>
+                </div>
+                <form [formGroup]="profileForm" class="profile-form">
+                    <div class="form-group form-group--float">
+                        <input type="text" formControlName="firstName" class="form-control" InputFloat required>
+                        <label>First Name</label>
+                        <i class="form-group__bar"></i>
+                    </div>
+                    <div class="form-group form-group--float">
+                        <input type="text" formControlName="lastName" class="form-control" InputFloat required>
+                        <label>Last Name</label>
+                        <i class="form-group__bar"></i>
+                    </div>
+                    <!-- <div class="form-group form-group--float">
+                        <input type="text" formControlName="videoUrl" class="form-control" InputFloat required>
+                        <label>Video URL</label>
+                        <i class="form-group__bar"></i>
+                    </div>
+                    <div class="form-group form-group--float">
+                        <input type="text" formControlName="twitter" class="form-control" InputFloat required>
+                        <label>twitter URL</label>
+                        <i class="form-group__bar"></i>
+                    </div>
+                    <div class="form-group form-group--float">
+                        <input type="text" formControlName="instagram" class="form-control" InputFloat required>
+                        <label>instagram URL</label>
+                        <i class="form-group__bar"></i>
+                    </div>
+                    <div class="form-group form-group--float">
+                        <input type="text" formControlName="linkedin" class="form-control" InputFloat required>
+                        <label>linkedin URL</label>
+                        <i class="form-group__bar"></i>
+                    </div>
+                    <div class="form-group form-group--float">
+                        <input type="text" formControlName="facebook" class="form-control" InputFloat required>
+                        <label>facebook URL</label>
+                        <i class="form-group__bar"></i>
+                    </div>
+                    <div class="form-group">
+                        <label>About Me</label>
+                        <textarea formControlName="aboutMe" autosize class="form-control" InputFloat required></textarea>
+                        <i class="form-group__bar"></i>
+                    </div> -->
+                </form>
+                <div class="profile-submit">
+                    <button disabled={{formErrorHandler}} type="button" class="btn content__background__theme" (click)="submit()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #imageCropper>
+        <div class="modal-header">
+            <h3 class="modal-title pull-left">Upload Photo</h3>
+            <button type="button" class="close pull-right" (click)="modalRef.hide()"><span
+                    aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body" *ngIf="imageChangedEvent === ''; else showImage">
+            <input type="file" (change)="fileChangeEvent($event)" hidden #uploader accept=".jpg, .JPG, .png, .PNG, .jpeg" />
+            <div class="upload_btn" (click)="uploader.click()">
+                <i class="far fa-images"></i>
+                <p>Select photo</p>
+            </div>
+        </div>
+        <ng-template #showImage>
+            <div class="modal-body">
+                <input type="file" (change)="fileChangeEvent($event)" hidden #uploader
+                    accept=".jpg, .JPG, .png, .PNG, .jpeg" />
+                <div class="upload_actions">
+                    <button class="btn btn-outline-light" (click)="uploader.click()">Select Photo</button>
+                    <div class="btn-group transform_actions">
+                        <button class="btn btn-outline-light" (click)="rotateLeft()"><i
+                                class="fa fa-rotate-left"></i></button>
+                        <button class="btn btn-outline-light" (click)="rotateRight()"><i
+                                class="fa fa-rotate-right"></i></button>
+                    </div>
+                </div>
+                <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1"
+                    format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+                    (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()" roundCropper="true"
+                    [transform]="transform" [onlyScaleDown]="true" [canvasRotation]="canvasRotation" resizeToWidth="100"
+                    resizeToHeigth="100">
+                </image-cropper>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success " (click)="uploadPhoto()" [disabled]="croppedImage ? false: true">Upload
+                    Photo</button>
+            </div>
+        </ng-template>
+    </ng-template>
+</div>
+</div>

@@ -1,0 +1,35 @@
+<div class="empty-state-container col-lg-12 justify-content-center text-center p-5 d-flex align-content-center flex-wrap"
+  *ngIf="portfolios.length <= 0; else listItems">
+  <div class="empy-state-content">
+    <i class="fas fa-box-open"></i>
+    <p>No Portfolio items are currently displayed.</p>
+  </div>
+</div>
+
+<ng-template #listItems>
+
+
+  <div class="content__title p-0">
+    <h1 class="mb-4 mt-2 text-uppercase px-4">
+      <i class="fa fa-cubes" aria-hidden="true"></i>
+      portfolio
+    </h1>
+  </div>
+
+<ul class="list-unstyled timeline-sm">
+
+  <li class="" *ngFor="let portfolioItem of portfolios">
+    <div class="timeline-sm-item">
+      <h5 class="mt-0 mb-1 content__title__text">{{portfolioItem.itemName}}</h5>
+      <img class="card-img-top" [src]="portfolioItem.itemImageUrl">
+      <p class="card-text mb-0 mt-2">
+        {{portfolioItem.itemDescription}}
+      </p>
+      <div class="row no-gutters listview__attrs mt-0">
+        <span *ngFor="let tag of portfolioItem.tags" class="content__title__text">{{tag}}</span>
+      </div>
+    </div>
+  </li>
+
+</ul>
+</ng-template>

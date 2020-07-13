@@ -1,0 +1,58 @@
+<div class="form">
+    <div class="card-body">
+        <div class="row">
+            <div class="row no-gutters col-sm-12">
+                <h3 class="card-body__title mr-3">Enable 2 Factor Authentication</h3>
+                <div class="toggle-switch">
+                    <input class="toggle-switch__checkbox" (click)="toggleOn2FA()" [checked]="on2FA" type="checkbox" />
+                    <i class="toggle-switch__helper"></i>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <label  class="form-label">2 Factor Authentication Code will be sent to this mobile number.</label>
+                    <ngx-intl-tel-input
+                    [cssClass]="'mobile__input'"
+                    [preferredCountries]="[CountryISO.Australia, CountryISO.UnitedKingdom]"
+                    [enableAutoCountrySelect]="false"
+                    [enablePlaceholder]="true"
+                    [searchCountryFlag]="true"
+                    [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                    [selectFirstCountry]="false"
+                    [selectedCountryISO]="CountryISO.Australia"
+                    [maxLength]="15"
+                    [tooltipField]="TooltipLabel.Name"
+                    [phoneValidation]="true"
+                    (input)="validSubmit()"
+                    [(ngModel)]="phone"></ngx-intl-tel-input>
+                </div>
+            </div>
+        </div>
+        <div class="page-footer pb-2 text-right">
+            <div class="row no-gutters ml-auto">
+                <button class="btn content__background__theme save_btn mx-1" style="color: white" [disabled]="!phone" *ngIf="!isVerified" (click)="requestPhoneVerification(verificationModal)">Verify Phone</button>
+                <button class="btn btn-success mx-1" *ngIf="isVerified">Verified</button>
+                <button class="btn content__background__theme save_btn mx-1" [disabled]="!isValid" (click)="submit()" type="button">Save</button>
+            </div>
+            <!-- <button class="btn btn-outline-light my-1">Cancel</button> -->
+        </div>
+    </div>
+</div>
+
+<ng-template #verificationModal>
+    <div class="modal-header">
+        <h3 class="modal-title pull-left">Verify Phone</h3>
+        <button type="button" class="close pull-right" (click)="modalRef.hide()"><span
+                aria-hidden="true">&times;</span></button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group form-group--float form-group--centered">
+            <input [(ngModel)]="verificationCode" class="form-control" InputFloat>
+            <label>Verification Code</label>
+            <i class="form-group__bar"></i>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" (click)="verify2FALogin()">Submit</button>
+    </div>
+</ng-template>

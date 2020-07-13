@@ -1,0 +1,143 @@
+.page {
+    // display: grid;
+    // grid-template-areas:
+    //     "ph ph"
+    //     "pb ps";
+    // grid-template-columns: 80% 20%;
+    // grid-column-gap: 10px;
+}
+.noPadding {
+    padding: 0px !important;
+}
+.page-header {
+    grid-area: ph;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-header {
+    display: grid;
+    grid-template-columns: 90% 10%;
+
+    .actions-group {
+        display: flex;
+        justify-content: center;
+    }
+}
+.action_icons {
+    font-size: 1.3rem;
+    -webkit-text-stroke: .8px #ffffff;
+}
+.page-body {
+    grid-area: pb;
+}
+
+.page-sidebar {
+    grid-area: ps;
+}
+
+.sidebar_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.empty-state {
+    display: flex;
+    justify-content: center;
+}
+
+.task-content {
+    display: grid;
+    grid-template-areas: "content dateupdated tags more";
+    grid-template-columns: 65% 30% 5%;
+}
+
+.tags-list {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: .2em;
+
+    button {
+        padding: .55rem .7rem;
+        border: 1px solid #e9ecef;
+        display: inline-block;
+        line-height: 100%;
+        font-size: .9rem;
+        margin: .2rem .25rem .055rem 0;
+        color: #fff;
+        background: hsl(random(255),45%,60%,1);
+    }
+}
+
+.task-dateupdated {
+    grid-area: "dateupdated";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.task-more-actions {
+    grid-area: "more";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.details-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    .details-item {
+        padding-top: 1.2em;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+}
+
+.modal-footer {
+    button {
+        width: 100%;
+    }
+}
+
+
+.tags-container {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+    padding-bottom: 1em;
+
+    button {
+        padding: .55rem .7rem;
+        border: 1px solid #e9ecef;
+        display: inline-block;
+        line-height: 100%;
+        font-size: .9rem;
+        margin: .2rem .25rem .055rem 0;
+        background-color: #fff;
+    }
+}
+
+.modal-body {
+    .tag-list {
+        display: flex;
+        span {
+            padding: .55rem .7rem;
+            border: 1px solid #e9ecef;
+            display: inline-block;
+            line-height: 100%;
+            font-weight: 600;
+            font-size: .9rem;
+            margin: .2rem .25rem .055rem 0;
+            color: #fff;
+            background-color: #007bff;
+            button {
+                color: white;
+            }
+        }
+    }
+
+}

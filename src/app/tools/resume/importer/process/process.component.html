@@ -1,0 +1,79 @@
+<div class="col-12 row no-gutters px-0">
+<h2 class="content_color">Found Items ({{foundItems}})</h2>
+<h4 class="content_color ml-auto">Import</h4>
+</div>
+<div *ngFor="let item of resumeItems" class="pl-3">
+    <div *ngIf="item.itemName === 'Education'" class="my-3">
+        <h5 class="content_color">{{ item.itemName }} ({{ item.itemList.length }})</h5>
+        <div class=" ml-2 " *ngFor="let item of item.itemList; let i = index">
+            <div class="row no-gutters">
+                <div class="card col-11 p-3 mb-2 row no-gutters">
+                    <p class="mb-0 h5 content__title__text">{{ item.institutionName }}</p>
+                    <p class="mb-0 ml-2 font-weight-bold"> {{ item.dateStarted }} - {{ item.dateFinished }}</p>
+                </div>
+
+                <div class="checkbox listview__checkbox my-auto ml-auto mr-2">
+                    <input type="checkbox" id="item-education-{{i}}">
+                    <label for="item-education-{{i}}" class="checkbox__label mt-1"></label>
+                </div>
+            </div>
+        </div> 
+    </div>
+    <div *ngIf="item.itemName === 'Skills'" class="my-3">
+        <h5 class="content_color">{{ item.itemName }} ({{ item.itemList.length }})</h5>
+        <div class="ml-2" *ngFor="let item of item.itemList; let i = index">
+            <div class="row no-gutters">
+                <div class="card col-11 p-3 mb-2 row no-gutters">
+                    <p class="mb-0 h5 content__title__text">{{ item.skillName }}</p>
+                    <progressbar [value]="item.skillLevel * 20" class="progress_bar" type="success"></progressbar>
+                </div>
+        
+                <div class="checkbox listview__checkbox my-auto ml-auto mr-2">
+                    <input type="checkbox" id="item-skills-{{i}}">
+                    <label for="item-skills-{{i}}" class="checkbox__label mt-1"></label>
+                </div>
+            </div>
+    </div>
+    </div>
+    <div *ngIf="item.itemName === 'Experience'"  class="my-3">
+        <h5 class="content_color">{{ item.itemName }} ({{ item.itemList.length }})</h5>
+        <div class=" ml-2 " *ngFor="let item of item.itemList; let i = index">
+            <div class="row no-gutters">
+                <div class="card col-11 p-3 mb-2 row no-gutters">
+                    <div class="row no-gutters mb-2">
+                        <p class="mb-0 h5 content__title__text">{{ item.companyName }}</p>
+                        <p class="mb-0 ml-2 font-weight-bold"> {{ item.dateStarted }} - {{ item.dateFinished }}</p>
+                    </div>
+                    <i class="mt-2">{{ item.notes }}</i>
+                </div>
+        
+                <div class="checkbox listview__checkbox my-auto ml-auto mr-2">
+                    <input type="checkbox" id="item-experience-{{i}}">
+                    <label for="item-experience-{{i}}" class="checkbox__label mt-1"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="item.itemName === 'Achievements'" class="my-3">
+        <h5 class="content_color">{{ item.itemName }} ({{ item.itemList.length }})</h5>
+        <div class=" ml-2 " *ngFor="let item of item.itemList; let i = index">
+            <div class="row no-gutters">
+                <div class="card col-11 p-3 mb-2 row no-gutters">
+                    <div class="row no-gutters mb-2">
+                        <p class="mb-0 h5 content__title__text">{{ item.achievementName }}</p>
+                        <p class="mb-0 ml-2 font-weight-bold"> {{ item.dateStarted }} - {{ item.dateFinished }}</p>
+                    </div>
+                    <i class="mt-2">{{ item.notes }}</i>
+                </div>
+        
+                <div class="checkbox listview__checkbox my-auto ml-auto mr-2">
+                    <input type="checkbox" id="item-achievement-{{i}}">
+                    <label for="item-achievement-{{i}}" class="checkbox__label mt-1"></label>
+                </div>
+            </div>
+        </div>
+    </div>  
+</div>
+<div class="page-footer pb-2 text-right">
+    <button class="btn content__background__theme save_btn my-1" (click)="continue()">Continue</button>
+</div>

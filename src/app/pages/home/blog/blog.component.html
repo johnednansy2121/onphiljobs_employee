@@ -1,0 +1,26 @@
+<div class="">
+    <app-jumbotron *ngIf="!blogPosts"
+                    title="Uh Oh!"
+                    message="Looks like there isn't anything in this category"
+                    details="We're so sorry about that, we've let our people know you saw this and we'll start filling this category up with content asap!">
+    </app-jumbotron>
+
+    <div class="card-columns">
+        <div class="card" *ngFor="let post of blogPosts">
+            <img *ngIf="post._embedded['wp:featuredmedia']" class="card-img-top" [src]="post._embedded['wp:featuredmedia'][0].source_url" alt="">
+
+            <div class="card-body">
+                <h4 class="card-title" [innerHTML]="post.title.rendered"></h4>
+                <h6 class="card-subtitle">by Admin</h6>
+
+                <p class="card-text" [innerHTML]="post.excerpt.rendered"></p>
+
+                <a routerLink="/blog/{{category}}/{{post.id}}" class="card-link">Read More...</a>
+            </div>
+        </div>
+    </div>
+    <div class="col" style="text-align: center;" *ngIf="isLoading">
+        <span>Loading more item . . . </span>
+    </div>
+
+</div>

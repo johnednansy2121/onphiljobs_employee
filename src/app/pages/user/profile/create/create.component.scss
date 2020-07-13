@@ -1,0 +1,129 @@
+@import "../../../../../assets/scss/variables";
+.form-group__bar {
+  &:before, &:after {
+    background-color: $text-main-color;
+  }
+}
+.form-group--float {
+  margin-top: 2.5rem;
+  .form-control {
+    color: #2525;
+      &:focus {
+        & ~ label {
+          color: $text-main-color;
+        }
+      }
+    }
+
+    & > label {
+    pointer-events: none;
+    position: absolute;
+    margin: 0;
+  }
+}
+
+.avatar-panel {
+  display: flex;
+  justify-content: center;
+
+  .avatar-section {
+    width: 100px;
+    position: relative;
+    .avatar {
+      border-radius: 50%;
+      width:100px;
+      height: 100px;
+      object-fit: contain;
+    }
+    button {
+      border-radius: 50%;
+      position: absolute;
+      bottom: 0;
+      right: 10%;
+    }
+  }
+}
+
+.btn-group {
+  display: flex;
+  justify-content: space-around;
+}
+
+.modal-footer {
+  button {
+    width: 100%;
+  }
+}
+
+.modal-body {
+    .upload_btn {
+        width: 100%;
+        text-align: center;
+        cursor: pointer;
+        i {
+            font-size: 7rem;
+        }
+        p {
+            font-size: 1.2rem;
+        }
+    }
+    .upload_actions {
+        width: 100%;
+        .btn-outline-light {
+            color: $navigation-link-color;
+            border-color: lighten($navigation-link-color, 30%);
+        }
+        .transform_actions {
+            float: right;
+            button:last-child {
+                margin-left: 3px !important;
+            }
+        }
+    }
+}
+.body-container {
+    background: $gradient-theme-background;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .profile-form-container {
+        width: 35%;
+        position: relative;
+        overflow: hidden;
+        .mark {
+            position: absolute;
+            width: 350px;
+            height: 15px;
+            background: #32c787;
+            transform: rotate(140deg);
+            top: 20px;
+            bottom: -20px;
+            left: -120px;
+        }
+        .panel-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .highlight {
+                color: $text-main-color;
+                font-weight: 600;
+            }
+        }
+
+        .profile-submit {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+            .btn {
+                padding: 8px;
+                background: $text-main-color;
+                color: #ffffff;
+                font-size: 1.3rem;
+                width: 300px;
+            }
+        }
+
+    }
+}

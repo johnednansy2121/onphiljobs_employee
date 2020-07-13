@@ -1,0 +1,87 @@
+<div class="body-container">
+    <div class="page col-sm-12 col-md-10 col-lg-8">
+        <header class="content__title">
+            <h1 class=""> Add Portfolio </h1>
+            <div class="actions">
+                <a class="btn back_btn" [routerLink]="'/my/portfolio'"><i class="fa fa-chevron-left"></i> Back</a>
+            </div>
+        </header>
+
+        <div class="page-body">
+                <div class="card">
+                    <div class="media">
+                        <div class="col-12" *ngIf="displayImage == ''; else image">
+                            <div class="empty-media">
+                                <button class="btn"><i class="far fa-images" (click)="fileInput.click()"></i></button>
+                                <span>Add a portfolio image.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="file" hidden accept=".jpg, .png, .jpeg" #fileInput (change)="fileChange($event)" />
+                    <div class="col-lg-12 mt-2">
+                    <form [formGroup]="portfolioForm">
+                            <div class="formItem">
+                                <div class="form_header">Portfolio Name</div>
+                                <div class="input_container">
+                                    <input formControlName="itemName" type="text" class="form-control text_input" maxlength="80" InputFloat>
+                                    <div class="counter_limit">
+                                        <div class="row no-gutters">
+                                            <round-progress class="my-auto" [ngClass]="{'warning_limit': getLength('itemName')>=80}"
+                                                [current]="getLength('itemName')" [max]="80" [radius]="7" [stroke]="3" [rounded]="true"
+                                                [clockwise]="true" [responsive]="false" [duration]="800" [animation]="'easeInOutQuart'"
+                                                [animationDelay]="0">
+                                            </round-progress>
+                                            <p class="ml-2 my-auto">
+                                                {{ 80 - getLength('itemName') }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="formItem">
+                                <div class="form_header mr-1">Portfolio Description</div>
+                                <div class=" input_container">
+                                    <textarea formControlName="itemDescription" autosize class="form-control text_area_input" rows="5" maxlength="500"></textarea>
+                                    <div class="counter_limit">
+                                        <div class="row no-gutters">
+                                            <round-progress class="my-auto" [ngClass]="{'warning_limit': getLength('itemDescription')>=500}"
+                                                [current]="getLength('itemDescription')" [max]="500" [radius]="7" [stroke]="3" [rounded]="true"
+                                                [clockwise]="true" [responsive]="false" [duration]="800" [animation]="'easeInOutQuart'"
+                                                [animationDelay]="0">
+                                            </round-progress>
+                                            <p class="ml-2 my-auto">
+                                                {{ 500 - getLength('itemDescription') }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="tags_group">
+                            <div class="formItem">
+                                <div class="form_header">Tags</div>
+                                <input required [(ngModel)]="selected" type="text" class="form-control text_input" [placeholder]="tagResponse" (keyup.enter)="addTag()" InputFloat>
+                            </div>
+                            <div class="tag-list row listview__attrs">
+                                <span *ngFor="let tag of tags; let i = index">{{tag}}<button class="btn" (click)="deleteTag(i)"><i
+                                            class="fas fa-times"></i></button></span>
+                            </div>
+                        </div>
+                        </div>
+                    <div class="page-footer">
+                        <button class="btn content__background__theme" [disabled]="!portfolioForm.valid || displayImage == ''" (click)="submit()">Save</button>
+                    </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+<ng-template #image>
+    <div class="image_container">
+        <img [src]="displayImage" class="media-image" />
+        <div class="icon_container" (click)="fileInput.click()">
+            <div class="img__container">
+                <img src="assets/img/icon/edit_camera.png" alt="">
+            </div>
+        </div>
+    </div>
+</ng-template>

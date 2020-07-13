@@ -1,0 +1,15 @@
+.card-header {
+    border: 1px solid rgb(201, 201, 201);
+}
+.curs_pointer {
+    cursor: pointer;
+}
+.transitions {
+    transition: .4s;
+}
+.border__box:first-child {
+    border-right: 1px solid rgb(201, 201, 201);
+}
+.border__box:last-child {
+    border-left: 1px solid rgb(201, 201, 201);
+}

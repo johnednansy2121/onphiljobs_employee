@@ -1,0 +1,6 @@
+<div [attr.data-ma-theme]="env.theme">
+<ngx-spinner class="spinner_color" [fullScreen]="true" type="ball-clip-rotate-multiple" size="large" bdColor="rgba(51,51,51,0.8)"
+             color="rgb(50,199,135)">
+    <p *ngIf="spinnerSvc.message.length>0" class="loading_text">{{spinnerSvc.message}}</p>
+</ngx-spinner>
+</div>

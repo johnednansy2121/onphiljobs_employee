@@ -1,0 +1,28 @@
+<div class="content__inner">
+<header class="content__title">
+    <h1>{{ pageTitle }}</h1>
+    <small>{{ pageSubTitle }}</small>
+</header>
+<div class="profile-container">
+    <div class="card overflow-hidden">
+        <div class="row no-gutters row-bordered row-border-light">
+            <div class="col-md-4 pt-0">
+                <div class="list-group" *ngFor="let tabs of listTab">
+                    <a class="list-group-item list-group-item-action" data-toggle="list"
+                        routerLinkActive="content__title__text" [routerLink]="['' + '' + tabs.tabRoute]">{{ tabs.tabName }}</a>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="tab-content">
+                    <div class="tab-pane fade active show">
+                        <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-footer pb-2 text-right">
+    <button class="btn content__background__theme save_btn my-1" (click)="submit()">Save</button>
+    <button class="btn btn-outline-light  my-1" (click)="cancel()">Cancel</button>
+</div>
+</div>

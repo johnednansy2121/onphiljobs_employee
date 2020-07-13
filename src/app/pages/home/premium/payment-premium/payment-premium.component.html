@@ -1,0 +1,82 @@
+<div class="body-container">
+    <div class="page col-sm-12 col-md-10 col-lg-7">
+        <header class="content__title">
+            <h1 class="">Review Payment</h1>
+            <small>Please review payment and plan.</small>
+            <div class="actions">
+                <a class="btn back_btn" [routerLink]="'/premium'"><i class="fa fa-chevron-left"></i> Back</a>
+            </div>
+        </header>
+
+        <div class="page-body">
+            <div class="card">
+                <div class="total-logo content__background__theme col-lg-12 row no-gutters p-0">
+                    <div class="total col-10 col-sm-10 col-md-6 col-lg-6 content__background__theme">
+                        <span>Premium</span>
+                        <span class="total-n">${{plan.amount / 100}} / {{plan.interval}}</span>
+
+                    </div>
+                    <div class="logo content__background__theme__lighten col-2 col-sm-2 col-md-6  col-lg-6 p-0">
+                    </div>
+                </div>
+                <!--End TOTAL-LOGO-->
+                <div class="step col">
+                    <div class="payment-method p-5 pt-4 column no-gutters justify-content-center text-center"
+                        *ngIf="paymentMethodSrv.paymentMethodItems.length <= 0; else payments">
+                        <i class="fa fa-credit-card h1"></i>
+                        <p class="my-auto">Sorry you have no payment method yet.</p>
+                        <button class="btn text-white col-lg-5 content__background__theme__lighten mt-3"><span class="h6 text-white"
+                                routerLink="/premium/add-payment">Add Payment
+                                method</span></button>
+                    </div>
+                    <ng-template #payments>
+                        <div class="payment-list">
+                            <div class="row no-gutters py-0 my-3">
+                                <div class="pl-2 h6 font-weight-normal mr-auto my-auto">
+                                    Payment Methods
+                                </div>
+                                <button class="btn text-white col-lg-5 content__background__theme__lighten"><span
+                                        class="h6 text-white" routerLink="/premium/add-payment">Add Payment
+                                        method</span></button>
+                            </div>
+                            <div class="card mb-2" *ngFor="let method of paymentMethodSrv.paymentMethodItems">
+                                <div class="card-body card_space row no-gutters p-4"
+                                    (click)="selectPaymentMethod(method._id, 'object-' + method._id )">
+                                    <div class="payment-method-content mr-auto">
+                                        {{method.cardType.toUpperCase()}}
+                                        -
+                                        <b>{{method.last4digit}}</b>
+                                    </div>
+                                    <input class="mr-2 my-auto" type="radio" name="paymentMethod"
+                                        [id]="'object-' + method._id" />
+                                </div>
+                            </div>
+                            <div class="form-group pl-0 col-lg-12 justify-content-center mt-4">
+                                <div class="float-right">
+                                    <label class="float-right pl-4 h6 font-weight-normal">Promo code (applies after checkout)</label>
+                                    <input type="text" class="mb-1" [(ngModel)]="promoCode">
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </div>
+
+                <div class="step conf-button m-3" *ngIf="paymentMethodSrv.paymentMethodItems.length >= 0">
+                    <div class="row no-gutters col-lg-12">
+                        <button class="btn text-white col-lg-12 content__background__theme" (click)="subscribe()"><span class="h6 text-white"
+                                >Make Payment</span></button>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="pull-right">
+                        <img src="assets/img/stripe/powered_by_stripe.png" height="26" width="119"/>
+                    </div>
+                </div>
+            </div>
+
+            <small class="pull-left">* All payments are handled securely by stripe, Fllair does not store your card details.</small>
+
+        </div>
+    </div>
+</div>

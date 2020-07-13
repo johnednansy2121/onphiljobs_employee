@@ -1,0 +1,103 @@
+<div class="body-container">
+    <div class="page">
+        <header class="content__title">
+            <h1 class=""> Add Experience </h1>
+            <div class="actions">
+                <a class="btn back_btn" [routerLink]="'/my/experiences'"><i class="fa fa-chevron-left"></i> Back</a>
+            </div>
+        </header>
+
+        <div class="page-body">
+
+            <form [formGroup]="experienceTable">
+                <div class="row notes">
+                    <div formArrayName="tableRows" *ngFor="let group of getFormControls.controls; let i = index"
+                        class="col-sm-6 col-md-6 col-lg-4 notes__item ">
+                        <a class="" [formGroupName]="i">
+                            <div class="formItem">
+                                <div class="form_header">Company</div>
+                                <div class="row no-gutters input_container">
+                                    <input formControlName="organizationName" type="text" class="form-control text_input" maxlength="80" InputFloat>
+                                    <div class="counter_limit">
+                                        <div class="row no-gutters">
+                                            <round-progress class="my-auto" [ngClass]="{'warning_limit': getLength(group, 'organizationName')>=80}"
+                                                [current]="getLength(group, 'organizationName')" [max]="80" [radius]="7" [stroke]="3" [rounded]="true"
+                                                [clockwise]="true" [responsive]="false" [duration]="800" [animation]="'easeInOutQuart'"
+                                                [animationDelay]="0">
+                                            </round-progress>
+                                            <p class="ml-2 my-auto">
+                                                {{ 80 - getLength(group, 'organizationName') }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="formItem">
+                                <div class="form_header">Job Title</div>
+                                <div class="row no-gutters input_container">
+                                    <input formControlName="jobTitle" type="text" class="form-control text_input" maxlength="80" InputFloat>
+                                    <div class="counter_limit">
+                                        <div class="row no-gutters">
+                                            <round-progress class="my-auto" [ngClass]="{'warning_limit': getLength(group, 'jobTitle')>=80}"
+                                                [current]="getLength(group, 'jobTitle')" [max]="80" [radius]="7" [stroke]="3" [rounded]="true"
+                                                [clockwise]="true" [responsive]="false" [duration]="800" [animation]="'easeInOutQuart'"
+                                                [animationDelay]="0">
+                                            </round-progress>
+                                            <p class="ml-2 my-auto">
+                                                {{ 80 - getLength(group, 'jobTitle') }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="formItem">
+                                <div class="form_header">Location</div>
+                                <input formControlName="location" type="text" class="form-control text_input" placeholder="" InputFloat>
+                            </div>
+                            <div class="form-group formItem">
+                                <div class="form_header ">Time Period</div>
+                                <div class="time_period">
+                                    <input placeholder="mm/dd/yyyy" class="form-control" type="text"
+                                        formControlName="dateStarted" bsDatepicker>
+                                    <p>to</p>
+                                    <input placeholder="mm/dd/yyyy" class="form-control" type="text"
+                                        formControlName="dateFinished" bsDatepicker>
+                                </div>
+                            </div>
+                            <div class="formItem">
+                                    <div class="form_header">Key Responsibilities</div>
+                                    <div class="row no-gutters input_container">
+                                    <textarea formControlName="jobDescription" autosize class="form-control text_area_input" maxlength="500" rows="10"></textarea>
+                                        <div class="counter_limit">
+                                            <div class="row no-gutters">
+                                                <round-progress class="my-auto" [ngClass]="{'warning_limit': getLength(group, 'jobDescription')>=500}"
+                                                    [current]="getLength(group, 'jobDescription')" [max]="500" [radius]="7" [stroke]="3" [rounded]="true"
+                                                    [clockwise]="true" [responsive]="false" [duration]="800" [animation]="'easeInOutQuart'"
+                                                    [animationDelay]="0">
+                                                </round-progress>
+                                                <p class="ml-2 my-auto">
+                                                    {{ 500 - getLength(group, 'jobDescription') }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </a>
+                        <div class="notes__actions" data-demo-action="delete-listing" (click)="deleteRow(i)">
+                            <i class="fa fa-trash"></i>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-4 notes__item ">
+                        <a class="add-container" (click)="addRow()">
+                            <button class="btn"><i class="fa fa-plus"></i></button>
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="page-footer">
+            <button class="btn content__background__theme" [disabled]="!experienceTable.valid" (click)="submit()">Save</button>
+        </div>
+    </div>
+
+</div>

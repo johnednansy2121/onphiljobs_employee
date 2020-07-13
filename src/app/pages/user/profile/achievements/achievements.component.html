@@ -1,0 +1,30 @@
+<div class="empty-state-container col-lg-12 justify-content-center text-center p-5 d-flex align-content-center flex-wrap"
+  *ngIf="achievementItems.length <= 0; else listItems">
+  <div class="empy-state-content">
+    <i class="fas fa-box-open"></i>
+    <p>No Achievement items are currently displayed.</p>
+  </div>
+</div>
+<ng-template #listItems>
+
+  <div class="content__title p-0">
+    <h1 class="mb-4 mt-2 text-uppercase px-4 content_color">
+      <i class="fa fa-trophy" aria-hidden="true"></i>
+      Achievements
+    </h1>
+  </div>
+
+<ul class="list-unstyled timeline-sm px-5">
+
+  <li class="" *ngFor="let achievementItem of achievementItems">
+    <span class="timeline-sm-date">{{achievementItem.dateStarted | date: 'MM/yyyy'}} <br/> {{achievementItem.dateFinished  | date: 'MM/yyyy'}}</span>
+
+    <div  class="timeline-sm-item pl-5 pb-3">
+      <h5 class="mt-0 mb-1 content__title__text">{{achievementItem.achievementName}}</h5>
+      <p>{{achievementItem.achievementDescription}}</p>
+    </div>
+
+  </li>
+
+</ul>
+</ng-template>

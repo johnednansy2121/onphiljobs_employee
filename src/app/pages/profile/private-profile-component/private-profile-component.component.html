@@ -1,0 +1,172 @@
+<app-header-public>
+</app-header-public>
+
+<div [attr.data-ma-theme]="env.theme">
+    <div class="public-padding">
+        <div class="row no-gutters">
+    
+            <div class="left_panel col-lg-4">
+                <div class="d-flex justify-content-center">
+                    <div><img class="rounded-circle"
+                            [src]="profile.displayPicture == '' || profile.displayPicture === null ? './assets/demo/img/profile-pics/8.jpg' : profile.displayPicture" />
+                    </div>
+                </div>
+
+                <div class="text-center profile_header">
+                    <h5 class="mt-2">
+                        {{profile.firstName}} {{profile.lastName}}
+                    </h5>
+                    <span class="font-weight-bold">{{profile.jobTitle}}</span>
+                </div>
+                
+                <div *ngIf="profile.premium.hasProSubscription " class="col-lg-12 text-center justify-content-center p-0">
+                    <button type="button" class="btn btn-sm btn-primary  mx-1 mt-1"
+                        *ngIf="profile.premium.hasProSubscription"
+                        tooltip="{{profile.firstName}} pays for a premium subscription">
+                        <i class="fa fa-check"></i> Premium
+                    </button>
+                    <button type="button" class="btn btn-sm btn-success mx-1 mt-1" *ngIf="profile.premium.hasHadInterview || profile.premium.hasInterview"
+                        tooltip="Interviewed on {{profile.premium.interviewDate | date}}">
+                        <i class="fa fa-check"></i> Interviewed
+                    </button>
+                    <button type="button" class="btn btn-sm btn-success mx-1 mt-1"
+                        *ngIf="profile.premium.hasProofOfWorkingRights">
+                        <i class="fa fa-check"></i> Identity
+                    </button>
+                    <button type="button" class="btn btn-sm btn-success mx-1 mt-1"
+                        *ngIf="profile.premium.isProfileVerified">
+                        <i class="fa fa-check"></i> Profile
+                    </button>
+                </div>
+
+                <hr class="w-90 mx-auto border-dotted">
+
+                <div class="text-center button_hire">
+                            <!--            <button type="button" class="btn content__background__theme p-lg-2 setPublicColor col-lg-5 mx-1 my-2">-->
+                            <!--                <i class="fa fa-handshake mr-1"></i> Contact me!-->
+                            <!--            </button>-->
+                            <button type="button"
+                                class="btn content__background__theme p-lg-2 setPublicColor col-lg-12 mx-1 my-2">
+                                <i class="fa fa-share mr-1"></i> Share
+                            </button>
+                </div>
+
+                <hr class="w-90 mx-auto mb-1 border-dotted">
+                <div class="link_content mt-lg-5 mt-sm-3">
+                    <div
+                        class="row no-gutters link_title px-3 py-2 text-left content__background__theme setPublicColor">
+                        <h2 class="my-auto">Links</h2>
+                    </div>
+                    <div class="link_list px-3 py-2">
+                        <div class="link_list_content row no-gutters">
+                            <div class="h3 col-lg-3 col-sm-2 col-3 icon_span"><i class="fa fa-linkedin"></i></div>
+                            <div class="sub_header col-lg-9 col-sm-10 col-9 text-left">
+                                <h5 class="mb-0 mt-1 content__title__text">Linkedin</h5>
+                                <a [href]="profile.socialLinks.linkedin">www.linkedin.com</a>
+                            </div>
+                        </div>
+                        <div class="link_list_content row no-gutters">
+                            <div class="h3 col-lg-3 col-sm-2 col-3 icon_span"><i class="fa fa-facebook"></i></div>
+                            <div class="sub_header col-lg-9 col-sm-10 col-9 text-left">
+                                <h5 class="mb-0 mt-1 content__title__text">Facebook</h5>
+                                <a [href]="profile.socialLinks.facebook">www.facebook.com</a>
+                            </div>
+                        </div>
+                        <div class="link_list_content row no-gutters">
+                            <div class="h3 col-lg-3 col-sm-2 col-3 icon_span"><i class="fa fa-instagram"></i></div>
+                            <div class="sub_header col-lg-9 col-sm-10 col-9 text-left">
+                                <h5 class="mb-0 mt-1 content__title__text">Instagram</h5>
+                                <a [href]="profile.socialLinks.instagram">www.instagram.com</a>
+                            </div>
+                        </div>
+                        <div class="link_list_content row no-gutters">
+                            <div class="h3 col-lg-3 col-sm-2 col-3 icon_span"><i class="fa fa-twitter"></i></div>
+                            <div class="sub_header col-lg-9 col-sm-10 col-9 text-left">
+                                <h5 class="mb-0 mt-1 content__title__text">Twitter</h5>
+                                <a [href]="profile.socialLinks.twitter">www.twitter.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right_panel col-lg-8 pl-lg-4 pt-lg-3 pt-0">
+                <div class="card">
+                    <tabset class="tab-container" justify="'justified'">
+                        <div class="tab-content">
+                            <tab heading="Details" class="tab-pane"><app-details-private-profile-component [profile]="profile"></app-details-private-profile-component></tab>
+                            <tab heading="Experience" class="tab-pane"><app-experience-private-profile-view [experiences]="profile.resume.experiences"></app-experience-private-profile-view></tab>
+                            <tab heading="Skills" class="tab-pane"><app-skill-private-profile-view [skills]="profile.resume.skills"></app-skill-private-profile-view></tab>
+                            <tab heading="Education" class="tab-pane"><app-education-private-profile-view [educations]="profile.resume.educations"></app-education-private-profile-view></tab>
+                            <tab heading="Achievements" class="tab-pane"><app-achievements-private-profile-view [achievements]="profile.resume.achievements"></app-achievements-private-profile-view></tab>
+                            <tab heading="Portfolios" class="tab-pane"><app-portfolios-private-profile-view [portfolios]="profile.resume.portfolios"></app-portfolios-private-profile-view></tab>
+                            <tab heading="Reviews" class="tab-pane"><app-review-private-profile-view [reviews]="profile.resume.reviews"></app-review-private-profile-view></tab>
+                        </div>
+                    </tabset>
+                </div>
+                <!-- <mat-tab-group>
+                    <mat-tab label="Details">Content</mat-tab>
+                    <mat-tab label="Experience">Content</mat-tab>
+                    <mat-tab label="Skills">Content</mat-tab>
+                    <mat-tab label="Education">Content</mat-tab>
+                    <mat-tab label="Achievements">Content</mat-tab>
+                    <mat-tab label="Portfolios">Content</mat-tab>
+                    <mat-tab label="Reviews">Content</mat-tab>
+                </mat-tab-group> -->
+                <!-- <div class="overview_section mb-5">
+                    <div class="overview_content">
+                        <div class="overview_card">
+                            <div class="overview_tabs">
+                                <div class="overview content__background__theme setPublicColor px-4 pt-4 pb-2 mb-5 row no-gutters">
+                                    <div *ngFor="let tabs of overviewTabs" class="tabs mx-2">
+                                        <a class="pb-2" routerLinkActive="active"
+                                            [routerLink]="['' + '' + tabs.tabRoute]">{{ tabs.tabName}}</a>
+                                    </div>
+                                </div>
+                                <div class="overview content__background__theme px-4 pt-4 pb-2 mb-5 row no-gutters justify-content-center">
+                                    <div *ngFor="let tabs of overviewTabs" class="tabs mx-2 ">
+                                        <a class="h3 pb-1" routerLinkActive="active"
+                                            [routerLink]="['' + '' + tabs.tabRoute]">
+                                            <i class="{{tabs.tabIcon}}" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="overview_outlet">
+                                <router-outlet></router-outlet>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- <ng-template #socialShare>
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">Share</h4>
+            <button type="button" class="p-3 close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row no-gutters justify-content-center">
+
+                <div *ngFor="let item of socialShareItems" class="curs_pointer">
+                    <div (click)="shareProfile(item.label)" [style.background]="item.color"
+                        class="mx-2 social_share_button rounded-circle"><i [class]="item.icon"></i></div>
+                    <p class="text-center font-weight-bold mt-2">{{ item.name }}</p>
+                </div>
+
+                <div class="copy_link">
+                    <div class="copy_link_container row no-gutters p-3">
+                        <p class="my-auto">{{ link }}</p>
+                        <p class="ml-auto my-auto cop_btn curs_pointer content__title__text font-weight-bold"
+                            (click)="copy()">COPY</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template> -->
+</div>

@@ -1,0 +1,17 @@
+.body-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    .profile-container {
+        width: 50%;
+        .card {
+            .card-body {
+                .content-item {
+                    padding: 20px 20px 0;
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+        }
+    }
+}

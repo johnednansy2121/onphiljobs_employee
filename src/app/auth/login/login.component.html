@@ -1,0 +1,82 @@
+<div  [attr.data-ma-theme]="env.theme">
+<div class="content__gradient__background body_container">
+
+    <div class="login_container">
+        <div class="login">
+            <div class="card">
+                <div class="card-body">
+                    <app-auth-leftpanel class="left-panel"></app-auth-leftpanel>
+                    <div class="right_panel">
+                        <div class="form__container">
+                            <div class="panel_title">
+                                <img src="assets/img/logos/fllair-logo-transparent.png" alt="" class="content__background__theme logo mx-auto">
+                                <h4 class="card-title content__title__text">Welcome Back!</h4>
+                                <h6 class="card-subtitle">Please enter the usename and password of your account to login.
+                                </h6>
+                            </div>
+                            <form [formGroup]="loginForm" >
+                                <div class="login_body">
+                                    <div class="error_tip">{{ errorMessage }}</div>
+                                    <div class="form-group form-group--float form-group--centered">
+                                        <i class="fa fa-user content__title__text"></i>
+                                        <input [ngStyle]="{'border-bottom':f.email.value === null  && errorMessage  !== '' ? '2px solid red' : '2px solid #2525' }" formControlName="email"  type="text" class="form-control" InputFloat required (keydown.enter)="login(verificationModal)">
+                                        <label>Email Address</label>
+                                        <i class="form-group__bar"></i>
+                                    </div>
+                                    
+                                    <div class="form-group form-group--float form-group--centered">
+                                        <i class="fa fa-lock content__title__text"></i>
+                                        <input [ngStyle]="{'border-bottom':f.password.value === null && errorMessage  !== '' ? '2px solid red' : '2px solid #2525' }" formControlName="password" type="password" class="form-control" autocomplete="on" InputFloat required  (keydown.enter)="login(verificationModal)" >  
+                                        <label>Password</label>
+                                        <i class="form-group__bar"></i>
+                                    </div>
+                                </div>
+                                <div class="forgot_password">
+                                    <p routerLink="/auth/forgot" class="content__title__text">Forgot Password?</p>
+                                </div>
+                                <div class="login_button" >
+                                    <button type="submit" [disabled]="formErrorHandler"  type="button" class="btn content__background__theme col-12" (click)="login(verificationModal)">Sign In</button>
+                                </div>
+                            </form>
+                            <!-- <div class="line_separ">
+                                <hr>
+                            </div> -->
+
+                            <div class="sign_up">
+                                <p> Not a member? <span routerLink="/auth/signup" class="content__title__text">Sign up Now</span></p>
+                            </div>
+
+                            
+                        </div>
+                        <div class="footer__link">
+                            <div class="footer__container m-3 mr-0">
+
+                                    Need help send us a message <a class="btn-sm content__background__theme" href="javascript:void(Tawk_API.toggle())"><i class="far fa-comments"></i>Talk with us</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<ng-template #verificationModal>
+    <div class="modal-header">
+        <h3 class="modal-title pull-left">Verify 2 Factor Authentication</h3>
+        <button type="button" class="close pull-right" (click)="modalRef.hide()"><span
+                aria-hidden="true">&times;</span></button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group form-group--float form-group--centered">
+            <input [(ngModel)]="verificationCode" class="form-control" InputFloat>
+            <label>Verification Code</label>
+            <i class="form-group__bar"></i>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" (click)="verify2FALogin()">Submit</button>
+    </div>
+</ng-template>

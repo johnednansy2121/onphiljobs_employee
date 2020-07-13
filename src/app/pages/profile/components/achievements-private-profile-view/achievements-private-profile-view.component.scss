@@ -1,0 +1,50 @@
+@import "../../../../../assets/scss/scss-imports";
+.empty-state-container {
+    min-height: 45vh;
+    .empy-state-content {
+        i {
+            font-size: 7em;
+        }
+
+        a {
+            color: white;
+            width: 400px;
+        }
+    }
+}
+.timeline-sm .timeline-sm-item:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 3px;
+    left: -7px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid;
+    border-color: $green;
+}
+
+.timeline-sm-date {
+    min-width: 80px;
+}
+
+.timeline-sm .timeline-sm-item {
+    position: relative;
+    border-left: 2px solid #dee2e6;
+}
+
+.timeline-sm {
+    display: block;
+    padding: 0px 30px !important;
+    li {
+        display: flex;
+    }
+}
+
+.list-unstyled {
+    padding-left: 0;
+    list-style: none;
+    width: 100%;
+}

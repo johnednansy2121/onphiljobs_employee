@@ -1,0 +1,75 @@
+<div class="review-container" *ngIf="reviewItems.length <= 0; else listItems">
+    <div class="empty-state-container col-lg-12 justify-content-center text-center p-5 d-flex align-content-center flex-wrap">
+        <div class="empy-state-content">
+            <i class="fas fa-box-open"></i>
+            <p>No Review items are currently displayed.</p>
+            <button class="ml-auto btn content__background__theme text-white review_btn" (click)="openModal(addReview)" *ngIf="isAddReview">
+                Add Review
+            </button>
+        </div>
+    </div>
+</div>
+
+<ng-template  #listItems>
+    
+    <div class="row no-gutters pb-3 ">
+
+        <div class="content__title p-0 mb-0">
+            <h1 class="mb-4 mt-2 text-uppercase px-4">
+                <i class="fa fa-star" aria-hidden="true"></i>
+                Reviews
+            </h1>
+        </div>
+        <button class="ml-auto btn content__background__theme text-white mr-4" (click)="openModal(addReview)"  *ngIf="isAddReview">
+            Add Review
+        </button>
+    </div>
+    <div class="row no-gutters justify-content-center">
+        <div class="card col-lg-11 mx-2" *ngFor="let review of reviewItems">
+            <div class="card-header content__background__theme setPublicColor p-0">
+            </div>
+            <div class="card-body">
+                <div class="row no-gutters mb-2">
+                <h5 class="card-title mb-0 content__title__text setTextPublicColor">{{review.metadata.owner.userName}}</h5>
+                    <h6 class="ml-auto">{{review.metadata.dateCreated | date}}
+                    </h6>
+                </div>
+                <p class="card-text"><i>{{review.reviewDescription}}</i> </p>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+
+<ng-template  #addReview>
+    <div [attr.data-ma-theme]="env.theme" >
+
+    <div class="modal-header">
+        <div class="row no-gutters  pull-left">
+            <h3 class="modal-title mr-1">Add your review below</h3>
+        </div>
+        <button type="button" class="close pull-right p-3" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <div class="input_container">
+                <textarea [(ngModel)]="review" class="form-control text_area_input" rows="8" maxlength="500"></textarea>
+                <div class="counter_limit">
+                    <div class="row no-gutters">
+                        <round-progress class="my-auto" [ngClass]="{'warning_limit': getLength()>=500}"
+                            [current]="getLength()" [max]="500" [radius]="7" [stroke]="3" [rounded]="true"
+                            [clockwise]="true" [responsive]="false" [duration]="800" [animation]="'easeInOutQuart'"
+                            [animationDelay]="0">
+                        </round-progress>
+                        <p class="ml-2 my-auto">
+                            {{ 500 - getLength() }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="btn content__background__theme mt-2 col-lg-12 text-white" (click)="submit()">Submit</button>
+    </div></div>
+</ng-template>

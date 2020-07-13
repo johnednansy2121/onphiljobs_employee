@@ -1,0 +1,10 @@
+<h2 class="content_color">Confirm Selection</h2>
+<div class="ml-5">
+    <h3 class="content_color">You are importing</h3>
+    <h4 class="ml-3 font-weight-light content_color" *ngFor="let item of resumeItems"> <span class="content__title__text font-weight-bold">{{ item.itemList.length }}</span> {{ item.itemName }}</h4>
+    <h3 class="content_color mt-3">This action cannot be undone, are you sure you wish to proceed?</h3>
+</div>
+<div class="page-footer pb-2 text-right">
+    <button class="btn btn-outline-light mx-1" routerLink="/tools/resume/importer/process">Go Back</button>
+    <button class="btn content__background__theme save_btn mx-1">Import</button>
+</div>
