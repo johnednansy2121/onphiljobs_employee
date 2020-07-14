@@ -18,7 +18,7 @@ export class ViewJobComponent implements OnInit {
 
   markers = []
   // google maps zoom level
-  zoom: number = 15;
+  zoom: number = 18;
   // initial center position for the map
   lat: number = -26.233449;
   lng: number = 133.848693;
@@ -45,8 +45,8 @@ export class ViewJobComponent implements OnInit {
 
     if (!this.jobModel.details.isWorkFromHome) {
       this.mapsAPILoader.load().then(() => {
-        // this.lat = this.jobModel.details.location.lat;
-        // this.lng = this.jobModel.details.location.long;
+        this.lat = this.jobModel.geoLocation.coordinates[1]
+        this.lng = this.jobModel.geoLocation.coordinates[0]
       });
     }
   }
@@ -65,7 +65,5 @@ export class ViewJobComponent implements OnInit {
     })
   }
 
-  checkSameAddress() {
-    return this.jobModel.details.location.address2 && this.jobModel.details.location.address1 !== this.jobModel.details.location.address2;
-  }
+
 }

@@ -13,7 +13,10 @@ export class SharedService {
   public country = ''
   public state = ''
   public city = ''
+  
+  public lat = -26.233449
+  public lng = 133.848693
+  public radius = 2226130*0.000621371192;
   public isDisabled = false;
   constructor() { }
-
 }

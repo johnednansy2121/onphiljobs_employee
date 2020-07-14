@@ -82,7 +82,10 @@ export class JobListComponent implements OnInit {
       filter: '',
       pageSize: 10,
       pageNum: 1,
-      orderBy: "metadata.dateCreated desc" //desc asc
+      orderBy: "metadata.dateCreated desc", //desc asc
+      lat: 0,
+      lng: 0,
+      distance: 0
     }
   }
   changePage(event){
@@ -101,18 +104,27 @@ export class JobListComponent implements OnInit {
     this.searchQuery.filter = ''
     this.spinnerSrv.show("Searching Jobs")
     console.log(this.sharedSrv.country)
-    if (this.sharedSrv.country === '' && !this.sharedSrv.isDisabled) {
+    if (!this.sharedSrv.isDisabled) {
       this.searchQuery.filter= `contains(title, '${this.titleSearch}')` ;  
     } else {
-      // this.searchQuery.filter= `contains(title, '${this.titleSearch}') and` ;  
-      if (!this.sharedSrv.isDisabled) {
-        this.searchQuery.filter= this.searchQuery.filter + `contains(details/location/country, '${this.sharedSrv.country}') and contains(details/location/state, '${this.sharedSrv.state}')` ;    
+      if (this.titleSearch !== '') {
+      this.searchQuery.filter= `contains(title, '${this.titleSearch}') and details/isWorkFromHome eq true` ;  
       } else {
-        this.searchQuery.filter= this.searchQuery.filter + `contains(details/isWorkFromHome, true)`;
-      } 
+        this.searchQuery.filter= this.searchQuery.filter + `details/isWorkFromHome eq true`;
+      }
     }
+    this.searchQuery.lat = this.sharedSrv.lat;
+    this.searchQuery.lng = this.sharedSrv.lng;
+    this.searchQuery.distance = this.sharedSrv.radius;
     console.log(this.searchQuery)
-    this.jobSrv.fetchJobs(this.searchQuery)
+    if (this.sharedSrv.isDisabled) {
+      const query = {
+        filter:  this.searchQuery.filter,
+        pageSize: 10,
+        pageNum: 1,
+        orderBy: "metadata.dateCreated desc",
+      }
+      this.jobSrv.fetchAllJobs(query)
       .then((result: any) => {
         this.jobList = result.items
         if (result.totalItems > 0) {
@@ -130,6 +142,26 @@ export class JobListComponent implements OnInit {
         this.searchedJob = true;
         this.searchQuery.filter = '';
       })
+    } else {
+      this.jobSrv.fetchJobs(this.searchQuery)
+      .then((result: any) => {
+        this.jobList = result.items
+        if (result.totalItems > 0) {
+          this.toastr.success(result.message)
+        } else {
+          this.toastr.error('No records found')
+        }
+      })
+      .catch(err => {
+        console.log(err)
+        this.toastr.error(err.error.Message)
+      })
+      .finally(() => {
+        this.spinnerSrv.hide()
+        this.searchedJob = true;
+        this.searchQuery.filter = '';
+      })
+    }
   }
 
   setMap() {

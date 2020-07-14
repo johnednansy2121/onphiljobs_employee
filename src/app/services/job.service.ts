@@ -30,9 +30,9 @@ export class JobService {
                 filter: `contains`,
                 pageNum: 1,
                 pageSize: 10,
-                orderBy: 'metadata.dateCreated desc'
+                orderBy: 'metadata.dateCreated desc',
             }
-            return this.fetchJobs(fetchJob)
+            return this.fetchAllJobs(fetchJob)
                 .then((res: any) => {
                     this.jobItems.push(res.items);
                     console.log(res);   
@@ -50,7 +50,19 @@ export class JobService {
         .set('$filter', searchQuery.filter)
         .set('$pageNum', searchQuery.pageNum)
         .set('$pageSize', searchQuery.pageSize)
-        .set('$orderBy', searchQuery.orderBy);
+        .set('$orderBy', searchQuery.orderBy)
+        .set('lat', searchQuery.lat)
+        .set('long', searchQuery.lng)
+        .set('distance', searchQuery.distance);
+        console.log(params)
+        return this.httpClient.get(environment.api_path + this.API_VERSION + 'jobs',{params}).toPromise()
+    }
+    public fetchAllJobs(searchQuery) {
+        const params = new HttpParams()
+        .set('$filter', searchQuery.filter)
+        .set('$pageNum', searchQuery.pageNum)
+        .set('$pageSize', searchQuery.pageSize)
+        .set('$orderBy', searchQuery.orderBy)
         console.log(params)
         return this.httpClient.get(environment.api_path + this.API_VERSION + 'jobs',{params}).toPromise()
     }

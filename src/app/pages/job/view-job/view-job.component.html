@@ -14,10 +14,8 @@
                 <div class="card">
                     <div *ngIf="!jobModel.details.isWorkFromHome" class="mapContainer">
                         <agm-map style="height:100%"  [latitude]="lat" [longitude]="lng" [streetViewControl]="false" [disableDefaultUI]="false" [zoom]="zoom">
-                          <!-- <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng" [markerDraggable]="false"
-                          ></agm-marker> -->
                           <agm-circle [latitude]="lat" [longitude]="lng" 
-                              [radius]="300"
+                              [radius]="50"
                               [fillColor]="'red'"
                               [circleDraggable]="false"
                               [editable]="false">
@@ -28,15 +26,10 @@
                         <img src="assets/img/background/wfh.png" alt="">
                     </div>
                     <div class="card-body">
-                        <!-- <div class="row no-gutters"> -->
                         <h4 class="content__title__text mb-0 ">{{ jobModel.title }}</h4>
                         <p class="mb-2">{{ jobModel.metadata.organization.name }}</p>
                         <p>{{ jobModel.subtitle }}</p>
-                            <!-- <div class="ml-auto my-auto icon__size">
-                                <i *ngIf="job.jobSaved" class="curs_pointer fas fa-star my-auto content__title__text" (click)="saveJob()"></i>
-                                <i *ngIf="!job.jobSaved" class="curs_pointer far fa-star my-auto content__title__text" (click)="saveJob()"></i>
-                            </div> -->
-                        <!-- </div> -->
+                           
                         <div class="row no-gutters">
                                 <div class="mt-auto">
                                     {{ jobModel.metadata.publishDate | date:'mediumDate' }} 
@@ -93,8 +86,7 @@
                             <i class="fa fa-list-alt"></i> category
                             </li>
                             <li *ngIf="!jobModel.details.isWorkFromHome">
-                                <i class="fa fa-map-marker"></i> {{ jobModel.details.location.city }} {{ jobModel.details.location.state }}, {{ jobModel.details.location.country }}  {{ jobModel.details.location.postalCode }}
-                                 <!-- <i class="fa fa-map-marker"></i> {{ jobModel.details.location.address1 }} -->
+                                <i class="fa fa-map-marker"></i> {{ jobModel.details.location.city }} {{ jobModel.details.location.state }}, {{ jobModel.details.location.country }} 
                               </li>
                               <li *ngIf="jobModel.details.isWorkFromHome">
                                   <i class="fa fa-map-marker"></i> Work from home

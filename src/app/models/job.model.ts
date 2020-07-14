@@ -4,14 +4,12 @@ export interface JobModel {
     subtitle: string,
     status: string,
     section: [],
+    geoLocation: {
+        coordinates: [0,1]
+    }
     details: {
       isWorkFromHome: boolean,
         location: {
-          address1:  string,
-          address2:  string,
-          postalCode:  string,
-          lat: number,
-          long: number,
           city: string,
           state: string,
           country: string,
