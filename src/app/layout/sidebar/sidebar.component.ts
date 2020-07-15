@@ -87,10 +87,14 @@ export class SidebarComponent implements OnInit {
         { title: "Tasks", icon: "tasks", route: "/tasks" },
       ],
     },
+    
     {
-      title: "Jobs",
-      icon: "running",
-      route: "/jobs",
+      title: 'Jobs', icon: 'running', visibility: 'inactive',
+      sub: [
+        { title: "Find Work", icon: "search", route: "/jobs/search" },
+        { title: "Applications", icon: "briefcase", route: "/jobs/manage/applications" },
+        { title: "Invitations", icon: "envelope", route: "/#" },
+      ],
     },
     {
       title: "People",

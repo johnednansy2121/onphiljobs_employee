@@ -40,7 +40,7 @@ export class ViewJobComponent implements OnInit {
       this.jobModel = this.activateRoute.snapshot.data.jobViewData;
       console.log(this.activateRoute.snapshot.data.jobViewData)
     } else {
-      this.router.navigateByUrl('/jobs')
+      this.router.navigateByUrl('/jobs/search')
     }
 
     if (!this.jobModel.details.isWorkFromHome) {

@@ -126,7 +126,6 @@ import { SettingsComponent } from './pages/user/settings/settings.component';
 import { JobListComponent } from './pages/job/job-list/job-list.component';
 import { ViewJobComponent } from './pages/job/view-job/view-job.component';
 import { reducer } from './reducers/profile.reducer';
-import { ManageVacanciesComponent } from './pages/job/manage-vacancies/manage-vacancies.component';
 import { PrivateProfileComponentComponent } from './pages/profile/private-profile-component/private-profile-component.component';
 import { DetailsPrivateProfileComponentComponent } from './pages/profile/components/details-private-profile-component/details-private-profile-component.component';
 import { ExperiencePrivateProfileViewComponent } from './pages/profile/components/experience-private-profile-view/experience-private-profile-view.component';
@@ -136,6 +135,7 @@ import { AchievementsPrivateProfileViewComponent } from './pages/profile/compone
 import { PortfoliosPrivateProfileViewComponent } from './pages/profile/components/portfolios-private-profile-view/portfolios-private-profile-view.component';
 import { ReviewPrivateProfileViewComponent } from './pages/profile/components/review-private-profile-view/review-private-profile-view.component';
 import { MapsComponent } from './utilities/maps/maps.component';
+import { ApplicationsComponent } from './pages/job/manage/applications/applications.component';
 
 @NgModule({
   declarations: [
@@ -195,7 +195,6 @@ import { MapsComponent } from './utilities/maps/maps.component';
     SettingsComponent,
     JobListComponent,
     ViewJobComponent,
-    ManageVacanciesComponent,
     PrivateProfileComponentComponent,
     DetailsPrivateProfileComponentComponent,
     ExperiencePrivateProfileViewComponent,
@@ -205,6 +204,7 @@ import { MapsComponent } from './utilities/maps/maps.component';
     PortfoliosPrivateProfileViewComponent,
     ReviewPrivateProfileViewComponent,
     MapsComponent,
+    ApplicationsComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,39 @@
+@import "../../../../../assets/scss/scss-imports";
+
+.progress {
+  font-size: 0.9em;
+}
+::ng-deep {
+  .mat-paginator {
+    background: none !important;
+  }
+}
+//bg overwrites
+.bg-success {
+  @extend .bg-success;
+  background-color: $success !important;
+}
+.bg-danger {
+  @extend .bg-danger;
+  background-color: $danger !important;
+}
+.bg-warning {
+  @extend .bg-warning;
+  background-color: $warning !important;
+}
+.bg-info {
+  @extend .bg-info;
+  background-color: $info !important;
+}
+.bg-primary {
+  @extend .bg-primary;
+  background-color: $primary !important;
+}
+.bg-light {
+  @extend .bg-light;
+  background-color: $light !important;
+}
+.bg-dark {
+  @extend .bg-dark;
+  background-color: $dark !important;
+}

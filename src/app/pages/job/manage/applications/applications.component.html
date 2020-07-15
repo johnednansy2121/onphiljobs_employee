@@ -1,0 +1,103 @@
+<div class="content__inner" >
+    <header class="content__title">
+        <h1>{{ pageTitle }}</h1>
+        <small>{{ pageSubTitle }}</small>
+    </header>
+
+    <div class="row">
+
+        <div class="col">
+            <div class="card" *ngFor="let application of jobApplications.items; let i = index">
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-9">
+                            <h5 class="card-title mb-4">{{ application.job.title }}</h5>
+                            <h5 class="card-subtitle mb-1">{{ application.job.subtitle }}</h5>
+                            <div class="row no-gutters mb-3">
+                                <div class="mt-auto">
+                                    {{ application.metadata.dateCreated | date:'mediumDate' }} 
+                                </div>
+                                
+                                <p *ngIf="application.job.premium" class="mt-auto mb-0 ml-2">- <span class="content__title__text">Featured</span></p>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="float-right">
+
+                                <div class="btn-group" placement="top-right" dropdown>
+                                    <button dropdownToggle type="button" class="btn"><i class="fas fa-ellipsis-v"
+                                                                                        aria-controls="dropdown-basic"></i></button>
+                                    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="button-basic">
+                                        <li role="menuitem">
+                                            <button class="dropdown-item" [routerLink]="'/jobs/view/' + application.job._id">View Job</button>
+                                        </li>
+                                        <li role="menuitem"  *ngIf="!(application.status === 'WITHRDAWN' || application.status === 'DECLINED')">
+                                            <button class="dropdown-item" (click)="withdrawApplication(application._id)">Withdraw Application</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-12">
+
+                            <div class="progress" style="height:32px;" *ngIf="application.status === 'WITHRDAWN'" >
+                                <div class="progress-bar bg-danger w-100" role="progressbar"  aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
+                                    <span class="justify-content-center text-white">Withdrawn</span>
+                                </div>
+                            </div>
+
+                            <div class="progress" style="height:32px;" *ngIf="application.status === 'DECLINED'">
+                                <div class="progress-bar bg-success mr-1 w-100" role="progressbar" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
+                                    <span class="justify-content-center text-white">Submitted</span>
+                                </div>
+                                <div class="progress-bar bg-warning mr-1 w-100" role="progressbar"  aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
+                                    <span class="justify-content-center text-white font">
+                                        Considering
+                                    </span>
+                                </div>
+                                <div class="progress-bar bg-danger w-100" role="progressbar"  aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
+                                    <span class="justify-content-center text-white font">
+                                        Declined
+                                        <i class="fa fa-question-circle" tooltip="We received so many high quality applications for this position, we are sorry that we could not consider you further."></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="progress" style="height:32px;" *ngIf="application.status === 'CONSIDERING' || application.status === 'SHORTLIST'">
+                                
+                                <div class="progress-bar bg-success mr-1 w-100" role="progressbar" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
+                                    <span class="justify-content-center text-white">Submitted</span>
+                                </div>
+                                <div class="progress-bar bg-warning w-100" role="progressbar"  aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
+                                    <span class="justify-content-center text-white font">
+                                        Considering
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="progress" style="height:32px;" *ngIf="application.status === 'SUBMITTED'">
+                                <div class="progress-bar bg-success w-100" role="progressbar" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
+                                    <span class="justify-content-center text-white">Submitted</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+              <div class="py-1 mb-3">
+                  <mat-paginator (page)="changePage($event)" [pageSize]="searchQuery.pageSize" [length]="jobApplications.items.length" [pageSizeOptions]="[5, 10, 25, 100]">
+                    </mat-paginator>
+              </div>
+        </div>
+
+    </div>
+</div>

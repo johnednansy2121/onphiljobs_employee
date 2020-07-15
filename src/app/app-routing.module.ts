@@ -79,7 +79,8 @@ import { ImporterComponent } from './tools/resume/importer/importer.component'
 import { SettingsComponent } from './pages/user/settings/settings.component';
 import { JobListComponent } from './pages/job/job-list/job-list.component';
 import { ViewJobComponent } from './pages/job/view-job/view-job.component';
-import {ManageVacanciesComponent} from "./pages/job/manage-vacancies/manage-vacancies.component";
+import { ApplicationsComponent } from "./pages/job/manage/applications/applications.component";
+import { ApplicationsDataResolver } from "./pages/job/manage/applications/resolver/applications.resolver";
 import { JobDataResolver } from './pages/job/job-list/resolver/job.resolver'
 import { ViewJobResolver } from './pages/job/view-job/resolver/viewjob.resolver'
 import { PrivateProfileComponentComponent } from './pages/profile/private-profile-component/private-profile-component.component'
@@ -238,7 +239,7 @@ const routes: Routes = [
         resolve: { reviewData: ReviewDataResolver }
       },
       {
-        path: 'jobs',
+        path: 'jobs/search',
         component: JobListComponent,
         resolve: { jobData: JobDataResolver }
       },
@@ -248,8 +249,9 @@ const routes: Routes = [
         resolve: { jobViewData: ViewJobResolver }
       },
       {
-        path: 'jobs/manage-vacancies',
-        component: ManageVacanciesComponent
+        path: 'jobs/manage/applications',
+        component: ApplicationsComponent,
+        resolve: { applicationsData: ApplicationsDataResolver }
       },
       {
         path: 'tasks',
