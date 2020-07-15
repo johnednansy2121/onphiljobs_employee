@@ -32,10 +32,11 @@
     }
     .link_list {
       .link_list_content {
-        .icon_span, .sub_header > a {
-          color: $navigation-link-color;
-        }
-         
+         background-color: transparent;
+      }
+      .link_list_content:hover{
+        border: 1px solid #ffbd5c;
+        cursor: pointer;
       }
     }
   }
@@ -95,6 +96,7 @@
         background-color: #FFFFFF;
         background-clip: border-box;
         border: 1px solid transparent;
+        border-right-width: 0px;
         border-radius: 2px;
         .overview_tabs {
           .overview {
