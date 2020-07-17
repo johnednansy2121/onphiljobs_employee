@@ -42,27 +42,27 @@ export class SidebarComponent implements OnInit {
   @ViewChild(PerfectScrollbarDirective, { static: false }) perfectScrollbarDirectiveRef?: PerfectScrollbarDirective;
 
   mainMenu = [
-    { title: "Go Premium", icon: "seedling", route: "/premium" },
+    // { title: "Go Premium", icon: "seedling", route: "/premium" },
     {
       title: "Content",
       icon: "home", 
       visibility: "active",
       sub: [
         { title: "News", icon: "rss", route: "/blog/news" },
-        { title: "Get Started", icon: "question", route: "/blog/get-started" },
-        {
-          title: "Premium",
-          icon: "heart",
-          route: "/blog/premium",
-          premium: true,
-        },
-        { title: "Challenges", icon: "fire", route: "/blog/challenges" },
+        // { title: "Get Started", icon: "question", route: "/blog/get-started" },
+        // {
+        //   title: "Premium",
+        //   icon: "heart",
+        //   route: "/blog/premium",
+        //   premium: true,
+        // },
+        // { title: "Challenges", icon: "fire", route: "/blog/challenges" },
         { title: "Job Search", icon: "search", route: "/blog/jobsearch" },
         { title: "Career", icon: "briefcase", route: "/blog/career" },
-        { title: "Wellbeing", icon: "book-medical", route: "/blog/wellbeing" },
-        { title: "Leadership", icon: "tasks", route: "/blog/leadership" },
-        { title: "Learning", icon: "book-reader", route: "/blog/learning" },
-        { title: "Students", icon: "university", route: "/blog/students" },
+        // { title: "Wellbeing", icon: "book-medical", route: "/blog/wellbeing" },
+        // { title: "Leadership", icon: "tasks", route: "/blog/leadership" },
+        // { title: "Learning", icon: "book-reader", route: "/blog/learning" },
+        // { title: "Students", icon: "university", route: "/blog/students" },
       ],
     },
     {
@@ -96,27 +96,27 @@ export class SidebarComponent implements OnInit {
         { title: "Invitations", icon: "envelope", route: "/#" },
       ],
     },
-    {
-      title: "People",
-      icon: "users",
-      route: "/5",
-      class: "disabled",
-      promote: true,
-    },
-    {
-      title: "Rewards",
-      icon: "smile-wink",
-      route: "/7",
-      class: "disabled",
-      promote: true,
-    },
-    {
-      title: "Marketplace",
-      icon: "store",
-      route: "/8",
-      class: "disabled",
-      promote: true,
-    },
+    // {
+    //   title: "People",
+    //   icon: "users",
+    //   route: "/5",
+    //   class: "disabled",
+    //   promote: true,
+    // },
+    // {
+    //   title: "Rewards",
+    //   icon: "smile-wink",
+    //   route: "/7",
+    //   class: "disabled",
+    //   promote: true,
+    // },
+    // {
+    //   title: "Marketplace",
+    //   icon: "store",
+    //   route: "/8",
+    //   class: "disabled",
+    //   promote: true,
+    // },
   ];
 
   // mainMenu: Array<any> = [
