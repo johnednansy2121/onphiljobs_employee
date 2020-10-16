@@ -77,6 +77,7 @@ export class SignupComponent implements OnInit {
       userName: this.f.userName.value.replace(/[^A-Z0-9_.-]/ig, '')
     });
   }
+  
   signUp() {
     //if (!this.formErrorHandler) {
     this.spinnerSrv.show('Registering you now...');

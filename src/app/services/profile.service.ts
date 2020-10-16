@@ -79,10 +79,12 @@ export class ProfileService {
         });
     }
     public getProfile() {
+        console.log("s")
         return this.httpClient.get(environment.api_path + this.API_VERSION + 'profile')
     }
 
     public getProfileForDetails() {
+        console.log("s1")
         return this.httpClient.get(environment.api_path + this.API_VERSION + 'profile').toPromise();
     }
 
