@@ -23,6 +23,10 @@ export class AuthenticationService {
 
   constructor(private httpClient: HttpClient, private toastSrv: ToastrService) { }
 
+  // public login(username: string, password: string) {
+  //   return this.httpClient.post(environment.api_path + this.API_VERSION + 'employer/login-employer', {userName: username, password:password }).toPromise()
+  // }
+
   public login(username: string, password: string) {
     return this.httpClient.post(environment.api_path + this.API_VERSION + 'user/login', {userName: username, password:password }).toPromise()
   }
@@ -31,6 +35,17 @@ export class AuthenticationService {
     this.clearTokenData();
     location.reload();
   }
+
+  // public signUp(signUpData, tag: string) {
+  //   const { userName, password, email, phone, on2FA, confirm } = signUpData
+  //   return this.httpClient.post(environment.api_path + this.API_VERSION + 'employer/signup-employer?tag=' + tag, { 
+  //     userName: userName.toLowerCase(),
+  //     password: password,
+  //     email: email,
+  //     phone: phone,
+  //     on2FA: on2FA,
+  //     confirmPassword: confirm }).toPromise()
+  // }
 
   public signUp(signUpData, tag: string) {
     const { userName, password, email, phone, on2FA, confirm } = signUpData
@@ -41,7 +56,11 @@ export class AuthenticationService {
       phone: phone,
       on2FA: on2FA,
       confirmPassword: confirm }).toPromise()
-  }
+   }
+
+  // public verify(id: string) {
+  //   return this.httpClient.get(environment.api_path + this.API_VERSION + 'employer/verify-employer/' + id);
+  // }
 
   public verify(id: string) {
     return this.httpClient.get(environment.api_path + this.API_VERSION + 'user/verify/' + id);
