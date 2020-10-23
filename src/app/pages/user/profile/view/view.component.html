@@ -4,10 +4,18 @@
 <div [attr.data-ma-theme]="env.theme">
     <div [ngClass]="actRoute.snapshot.data.publicView ? 'public-padding' : ''">
         <div class="row no-gutters">
-            <div class="left_panel col-lg-4">
+            <div class="left_panel col-lg-4 px-4">
                 <div class="d-flex justify-content-center">
-                    <div><img class="rounded-circle"
+                    <!-- <div><img class="rounded-circle"
                             [src]="user.displayPicture == '' || user.displayPicture === null ? './assets/demo/img/profile-pics/8.jpg' : user.displayPicture" />
+                    </div> -->
+                    <div *ngIf="user.displayPicture">
+                        <img class="user__img" [src]="user.displayPicture" alt="">
+                    </div>
+                    <div class="abbrev content__background__theme">
+                        <div class="name">
+                            {{fullname}}
+                        </div>
                     </div>
                 </div>
 
@@ -118,7 +126,8 @@
                     </div>
                 </div>
                 <div class="mt-lg-2 mt-sm-2">
-                    <button type="button" class="btn content__background__theme text-light w-100 ml-auto" (click)="openModal(socialShare)">
+                    <button type="button" class="btn content__background__theme text-light w-100 ml-auto"
+                        (click)="openModal(socialShare)">
                         <i class="fa fa-share mr-1"></i> Share
                     </button>
                 </div>
