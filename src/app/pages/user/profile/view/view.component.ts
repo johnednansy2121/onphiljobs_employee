@@ -31,6 +31,7 @@ export class ViewComponent implements OnInit {
   modalRef: BsModalRef;
   pageTitle;
   domain;
+  fullname: any;
   constructor(
     public actRoute: ActivatedRoute,
     private modalService: BsModalService,
@@ -42,6 +43,8 @@ export class ViewComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.actRoute.snapshot.data)
     this.user = this.actRoute.snapshot.data.userProfile;
+    let fname = this.user.firstName + " " + this.user.lastName;
+    this.fullname = fname.split(/\s/).reduce((response,word)=> response+=word.slice(0,1),'').substring(0,2);
     this.user.hasSocialLinks = (this.user.socialLinks.facebook
       || this.user.socialLinks.instagram || this.user.socialLinks.twitter || this.user.socialLinks.linkedin)
     this.activeSocialNavigation = 'posts';

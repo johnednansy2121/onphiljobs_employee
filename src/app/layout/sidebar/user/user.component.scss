@@ -20,16 +20,6 @@
   }
 }
 
-.user__img {
-  @include size(2.75rem, 2.75rem);
-  border-radius: 50%;
-  position: absolute;
-  left: .5rem;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-}
-
 .user__name {
   color: $headings-color;
   font-weight: $font-weight-bold;
@@ -70,4 +60,29 @@
       padding-bottom: 1rem;
     }
   }
+}
+
+.abbrev {
+  @include size(2.75rem, 2.75rem);
+  border: 2px solid rgba(158, 157, 157, 0.651) !important;
+  border-radius: 50%;
+  text-align: center;
+  color: white;
+  line-height: 32px;
+  position: absolute;
+  margin-left: -45px;;
+  .name {
+    font-size: 1.50rem;
+    text-transform: uppercase;
+  }
+}
+
+.user__img {
+  @include size(2.75rem, 2.75rem);
+  border-radius: 50%;
+  position: absolute;
+  left: .5rem;
+  top: 0;
+  bottom: 0;
+  margin: auto;
 }

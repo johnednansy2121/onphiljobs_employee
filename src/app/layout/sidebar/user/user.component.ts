@@ -29,7 +29,7 @@ import { Observable } from 'rxjs';
 })
 export class UserComponent implements OnInit {
   userMenu: boolean = false;
-
+  fullname: string;
   profile: Observable<IProfile>
 
   constructor(
@@ -42,5 +42,12 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.profile);
+    this.profile.subscribe(
+      data => {
+        let f = data.firstName + " " + data.lastName;
+        this.fullname = f.split(/\s/).reduce((response,word)=> response+=word.slice(0,1),'').substring(0,2); 
+      }
+    );
   }
 }
