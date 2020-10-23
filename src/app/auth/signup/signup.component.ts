@@ -77,8 +77,9 @@ export class SignupComponent implements OnInit {
       userName: this.f.userName.value.replace(/[^A-Z0-9_.-]/ig, '')
     });
   }
+  
   signUp() {
-    if (!this.formErrorHandler) {
+    //if (!this.formErrorHandler) {
     this.spinnerSrv.show('Registering you now...');
     let internationalNumber = ''
     if(this.phone === undefined) {
@@ -98,7 +99,7 @@ export class SignupComponent implements OnInit {
         this.toastr.error(err.error.message)
       })
 
-    }
+    //}
   }
   public checkWhiteSpace(data) {
     return data.indexOf(' ') >= 0;
