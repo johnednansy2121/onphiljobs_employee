@@ -40,6 +40,9 @@ export class CreateComponent implements OnInit {
     this.profileForm = this.formBuilder.group({
       firstName: ["", [Validators.required]],
       lastName: ["", [Validators.required]],
+      jobTitle: [""],
+      state: [""],
+      country: [""],
       aboutMe: [""],
       displayPicture: ["", []],
       videoUrl: [""],
@@ -66,6 +69,7 @@ export class CreateComponent implements OnInit {
       .subscribe(
         (data) => {
           this.toastr.success("Successfully created your profile.");
+          console.log(data);
           this.router.navigateByUrl("/blog/get-started");
         },
         (error) => {

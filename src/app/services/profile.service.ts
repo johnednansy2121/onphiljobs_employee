@@ -63,18 +63,23 @@ export class ProfileService {
     }
 
     public createProfile(data: any, _displayPicture) {
-        console.log(_displayPicture);
+        console.log(data.value.jobTitle);
         return this.httpClient.post(environment.api_path + this.API_VERSION + 'profile', {
             firstName: data.value.firstName,
             lastName: data.value.lastName,
             aboutMe: data.value.aboutMe,
             displayPicture: _displayPicture,
+            jobTitle: data.value.jobTitle,
             videoUrl: data.value.videoUrl,
             socialLinks: {
                 facebook: data.value.facebook,
                 twitter: data.value.twitter,
                 linkedin: data.value.linkedin,
                 instagram: data.value.instagram
+            },
+            location: {
+                state: data.value.state,
+                country: data.value.country,
             }
         });
     }
