@@ -84,7 +84,7 @@
 .body-container {
     background: $gradient-theme-background;
     width: 100vw;
-    height: 100vh;
+    height: 60vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -127,3 +127,7 @@
 
     }
 }
+
+.mat-step-header .mat-step-icon {
+    background-color: $text-main-color; 
+ }

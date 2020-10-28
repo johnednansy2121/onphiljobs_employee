@@ -61,6 +61,8 @@ import { MatPaginatorModule } from "@angular/material/paginator";
 import { NgxSelectModule } from 'ngx-select-ex';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MatTabsModule } from '@angular/material/tabs'
+import { MatStepperModule } from '@angular/material/stepper'
+
 
 //Our Generations
 import { AppRoutingModule } from './app-routing.module';
@@ -228,6 +230,7 @@ import { ApplicationsComponent } from './pages/job/manage/applications/applicati
     ProgressbarModule.forRoot(),
     BsDatepickerModule.forRoot(),
     MatTabsModule,
+    MatStepperModule,
     QuillModule.forRoot({
       modules: {
         toolbar: [

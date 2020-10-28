@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from "@angular/core";
+import { Component, OnInit, TemplateRef, ViewEncapsulation } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
 import { ProfileService } from "../../../../services/profile.service";
@@ -14,6 +14,7 @@ import { environment } from '../../../../../environments/environment';
   selector: "app-create",
   templateUrl: "./create.component.html",
   styleUrls: ["./create.component.scss"],
+  encapsulation: ViewEncapsulation.None
 })
 export class CreateComponent implements OnInit {
   profileForm: FormGroup;
@@ -24,6 +25,9 @@ export class CreateComponent implements OnInit {
   canvasRotation = 0;
   transform: ImageTransform = {};
   profileImage = "";
+  isLinear: boolean = true;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
 
   env = environment;
   constructor(
@@ -51,6 +55,20 @@ export class CreateComponent implements OnInit {
       linkedin: [""],
       facebook: [""],
     });
+
+    this.sampleForms();
+  }
+
+  sampleForms(){
+    this.firstFormGroup = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      jobTitle: ['', Validators.required]
+    });
+    this.secondFormGroup = this.formBuilder.group({
+      state: ['', Validators.required],
+      country: ['', Validators.required]
+    });  
   }
 
   get f() {
@@ -64,6 +82,13 @@ export class CreateComponent implements OnInit {
 
   submit() {
     this.spinnerSrv.show("Creating your profile");
+    this.profileForm.patchValue({
+      firstName: this.firstFormGroup.value.firstName,
+      lastName: this.firstFormGroup.value.lastName,
+      jobTitle: this.firstFormGroup.value.jobTitle,
+      state: this.secondFormGroup.value.state,
+      country: this.secondFormGroup.value.country
+    });
     this.profileService
       .createProfile(this.profileForm, this.profileImage)
       .subscribe(
