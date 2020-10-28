@@ -1,6 +1,6 @@
 <div [attr.data-ma-theme]="env.theme">
 <div class="body-container content__gradient__background">
-    <div class="profile-form-container">
+    <div class="profile-form-container mt-3">
         <div class="card">
             <div class="card-body">
                 <div class="mark content__background__theme">
@@ -17,66 +17,63 @@
                         <button (click)="openModal(imageCropper)"><i class="fas fa-pencil-alt"></i></button>
                     </div>
                 </div>
-                <form [formGroup]="profileForm" class="profile-form">
-                    <div class="form-group form-group--float">
-                        <input type="text" formControlName="firstName" class="form-control" InputFloat required>
-                        <label>First Name</label>
-                        <i class="form-group__bar"></i>
-                    </div>
-                    <div class="form-group form-group--float">
-                        <input type="text" formControlName="lastName" class="form-control" InputFloat required>
-                        <label>Last Name</label>
-                        <i class="form-group__bar"></i>
-                    </div>
-                    <div class="form-group form-group--float">
-                        <input type="text" formControlName="jobTitle" class="form-control" InputFloat required>
-                        <label>Job Title</label>
-                        <i class="form-group__bar"></i>
-                    </div>
-                    <div class="form-group form-group--float mb-0">
-                        <input type="text" formControlName="state" class="form-control" InputFloat required>
-                        <label>State</label>
-                        <i class="form-group__bar"></i>
-                    </div>
-                    <div class="form-group form-group--float mb-0">
-                        <input type="text" formControlName="country" class="form-control" InputFloat required>
-                        <label>Country</label>
-                        <i class="form-group__bar"></i>
-                    </div>
-                    <!-- <div class="form-group form-group--float">
-                        <input type="text" formControlName="videoUrl" class="form-control" InputFloat required>
-                        <label>Video URL</label>
-                        <i class="form-group__bar"></i>
-                    </div>
-                    <div class="form-group form-group--float">
-                        <input type="text" formControlName="twitter" class="form-control" InputFloat required>
-                        <label>twitter URL</label>
-                        <i class="form-group__bar"></i>
-                    </div>
-                    <div class="form-group form-group--float">
-                        <input type="text" formControlName="instagram" class="form-control" InputFloat required>
-                        <label>instagram URL</label>
-                        <i class="form-group__bar"></i>
-                    </div>
-                    <div class="form-group form-group--float">
-                        <input type="text" formControlName="linkedin" class="form-control" InputFloat required>
-                        <label>linkedin URL</label>
-                        <i class="form-group__bar"></i>
-                    </div>
-                    <div class="form-group form-group--float">
-                        <input type="text" formControlName="facebook" class="form-control" InputFloat required>
-                        <label>facebook URL</label>
-                        <i class="form-group__bar"></i>
-                    </div>
-                    <div class="form-group">
-                        <label>About Me</label>
-                        <textarea formControlName="aboutMe" autosize class="form-control" InputFloat required></textarea>
-                        <i class="form-group__bar"></i>
-                    </div> -->
-                </form>
-                <div class="profile-submit">
-                    <button disabled={{formErrorHandler}} type="button" class="btn content__background__theme" (click)="submit()">Save</button>
-                </div>
+                <mat-vertical-stepper [linear]="isLinear" #stepper>
+                    <mat-step [stepControl]="firstFormGroup">
+                      <form [formGroup]="firstFormGroup">
+                        <ng-template matStepLabel>Fill out your details</ng-template>
+                        <div class="form-group form-group--float mt-4">
+                            <input type="text" formControlName="firstName" class="form-control" InputFloat required>
+                            <label>First Name</label>
+                            <i class="form-group__bar"></i>
+                        </div>
+                        <div class="form-group form-group--float">
+                            <input type="text" formControlName="lastName" class="form-control" InputFloat required>
+                            <label>Last Name</label>
+                            <i class="form-group__bar"></i>
+                        </div>
+                        <div class="form-group form-group--float">
+                            <input type="text" formControlName="jobTitle" class="form-control" InputFloat required>
+                            <label>Job Title</label>
+                            <i class="form-group__bar"></i>
+                        </div>
+                        <div class="profile-submit w-50">
+                          <button class="btn content__background__theme" mat-button matStepperNext>Next</button>
+                        </div>
+                      </form>
+                    </mat-step>
+                    <mat-step [stepControl]="secondFormGroup">
+                      <form [formGroup]="secondFormGroup">
+                        <ng-template matStepLabel>Fill out your location</ng-template>
+                        <div class="form-group form-group--float mt-4">
+                            <input type="text" formControlName="state" class="form-control" InputFloat required>
+                            <label>State</label>
+                            <i class="form-group__bar"></i>
+                        </div>
+                        <div class="form-group form-group--float">
+                            <input type="text" formControlName="country" class="form-control" InputFloat required>
+                            <label>Country</label>
+                            <i class="form-group__bar"></i>
+                        </div>
+                        <div>
+                          <div class="profile-submit w-50">
+                            <button class="btn content__background__theme" mat-button matStepperNext>Next</button>
+                          </div>
+                        </div>
+                      </form>
+                    </mat-step>
+                    <mat-step>
+                      <ng-template matStepLabel>Done</ng-template>
+                      Done filling up the forms.
+                      <div class="row">
+                        <div class="profile-submit col-6 w-50">
+                            <button class="btn content__background__theme" mat-button (click)="submit()">Save</button>
+                        </div>
+                        <div class="profile-submit col-6 w-50">
+                            <button class="btn content__background__theme__secondary" mat-button (click)="stepper.reset()">Reset</button>
+                        </div>
+                      </div>
+                    </mat-step>
+                  </mat-vertical-stepper>
             </div>
         </div>
     </div>

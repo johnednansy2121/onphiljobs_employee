@@ -74,6 +74,9 @@
   .content__background__theme__lighten {
     background-color: lighten( $color, 10% ) !important;
   }
+  .content__background__theme__secondary{
+    background-color: #ffbd5c !important;
+  }
 
   .border_theme {
     border-color: $color !important;
